@@ -103,6 +103,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    unixtools.whereis
     fastfetch
     neovim
     wget
