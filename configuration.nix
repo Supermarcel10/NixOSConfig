@@ -103,7 +103,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    neofetch
+    fastfetch
     neovim
     wget
     btop
