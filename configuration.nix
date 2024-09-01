@@ -106,6 +106,7 @@
     unixtools.whereis
     fastfetch
     neovim
+    flameshot
     onlyoffice-bin_latest
     wget
     btop
