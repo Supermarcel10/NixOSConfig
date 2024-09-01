@@ -15,8 +15,11 @@
   boot.initrd.luks.devices."luks-1ede3cde-aee5-4e17-9126-a3efadc6b719".device = "/dev/disk/by-uuid/1ede3cde-aee5-4e17-9126-a3efadc6b719";
   networking.hostName = "marcel-pc";
 
-  # Networking 
-  networking.networkmanager.enable = true;
+  # Networking
+  networking.networkmanager = {
+    enable = true;
+    plugins = [ pkgs.networkmanager-openvpn ];
+  };
   # networking.wireless.enable = true;
 
   # Configure network proxy if necessary
@@ -47,6 +50,11 @@
   # KDE Plasma Desktop Environment
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
+
+  # Override KDE Plasma packages
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    spectacle
+  ];
 
   # X11 Keyboard Config 
   services.xserver.xkb = {
