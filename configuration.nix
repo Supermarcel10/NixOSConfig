@@ -106,6 +106,7 @@
     unixtools.whereis
     fastfetch
     neovim
+    onlyoffice-bin_latest
     wget
     btop
     discord
