@@ -78,6 +78,12 @@
     pulse.enable = true;
     #jack.enable = true;
   };
+  # Sudo Setup
+  security.sudo.extraConfig = ''
+    Defaults	timestamp_timeout=30
+    Defaults	passwd_tries=3
+    Defaults	insults
+  '';
 
   # User Account Setup 
   users.users.marcel = {
