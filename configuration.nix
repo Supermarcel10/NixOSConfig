@@ -91,7 +91,10 @@
   nixpkgs.config.allowUnfree = true;
 
   # Install Programs
+  # BASICS
   programs.firefox.enable = true;
+
+  # GAMES
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
@@ -100,6 +103,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    # BASICS
     unixtools.whereis
     fastfetch
     neovim
@@ -107,11 +111,13 @@
     onlyoffice-bin_latest
     wget
     btop
-    discord
-    ferdium
-    spotify    
     lm_sensors
     fanctl
+
+    # GENERAL APPS
+    vesktop # Discord without broken screenshare
+    ferdium
+    spotify
   ];
 
   # List services that you want to enable:
