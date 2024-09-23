@@ -48,4 +48,4 @@ If you want to use this configuration, or test it:
 
 ## 📄 License
 
-This configuration is released under the Unlicense License. See the [license file](LICENCE) for details.
+This configuration is released under the Unlicense License. See the [license file](https://github.com/Supermarcel10/NixOSConfig/blob/main/LICENSE) for details.
