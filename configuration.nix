@@ -6,6 +6,7 @@
       ./hardware-configuration.nix
       ./nvidia-setup.nix
       ./development.nix
+      ./sound.nix
     ];
 
   # Bootloader
