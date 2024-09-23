@@ -1,0 +1,19 @@
+- [ ] Flameshot (or some alternative screenshot tool)
+	- [ ] Keyboard Shortcuts
+    - [ ] Visual Issues
+- [ ] Pipewire
+  - [ ] Audio is a lot quieter than usual (seems to be more exponential)
+  - [ ] Loopback issues in Discord calls, where the other user can hear some of the background sounds
+  - [ ] Audio volume is separated from in-call volume and out-of-call volume
+    - [ ] Maybe would be cool to have a separate volume adjustment for other users and background volumes
+- [ ] Firefox PIP is not always on top
+- [ ] IDE Git configuration is not persistent (in a neat manner)
+- [ ] IDE persistent settings
+- [ ] Persistent Secrets
+  - [ ] Persistent WakaAPI
+- [ ] Persistent Bash profile
+- [ ] Persistent VIM profile
+- [ ] Persistent SSH login keys
+- [ ] Persistent network drive configuration
+- [ ] Persistent DE setup
+  - [ ] Potentially move to Hyprland
