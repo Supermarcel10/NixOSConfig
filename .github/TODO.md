@@ -10,7 +10,7 @@
 - [ ] IDE Git configuration is not persistent (in a neat manner)
 - [ ] IDE persistent settings
 - [ ] Persistent Secrets
-  - [ ] Persistent WakaAPI
+  - [ ] Persistent WakaAPI (~/.wakatime.cfg)
 - [ ] Persistent Bash profile
 - [ ] Persistent VIM profile
 - [ ] Persistent SSH login keys
