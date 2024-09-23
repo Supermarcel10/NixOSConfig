@@ -48,4 +48,4 @@ If you want to use this configuration, or test it:
 
 ## 📄 License
 
-This configuration is released under the MIT License. See the `LICENSE` file for details.
+This configuration is released under the Unlicense License. See the [license file](LICENCE) for details.
