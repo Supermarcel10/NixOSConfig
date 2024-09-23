@@ -115,9 +115,13 @@
     fanctl
 
     # GENERAL APPS
+    obsidian
     vesktop # Discord without broken screenshare
     ferdium
     spotify
+
+    # GAMES
+    prismlauncher
   ];
 
   # List services that you want to enable:
