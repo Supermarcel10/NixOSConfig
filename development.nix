@@ -25,6 +25,11 @@
     nodejs
     yarn
     nodejs_22
+    
+    # Haskell
+    ghc
+    haskell-language-server
+    cabal-install
   ];
 
   environment.variables = {
