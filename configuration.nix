@@ -118,7 +118,7 @@
     obsidian
     vesktop # Discord without broken screenshare
     ferdium
-    spotify
+    tidal-hifi
 
     # GAMES
     prismlauncher
