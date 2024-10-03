@@ -117,6 +117,8 @@
     # GENERAL APPS
     obsidian
     vesktop # Discord without broken screenshare
+    teams-for-linux
+    zoom-us
     ferdium
     tidal-hifi
 
