@@ -10,6 +10,9 @@
     jetbrains.idea-ultimate
     jetbrains.clion
 
+    # VSCode IDE
+    vscode
+
     # Development Tools & Programming Languages
     git
     docker
@@ -26,7 +29,10 @@
     yarn
     pnpm
     nodejs_22
-    
+
+    # Elm
+    elmPackages.elm
+
     # Haskell
     ghc
     haskell-language-server
