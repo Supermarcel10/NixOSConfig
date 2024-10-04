@@ -24,6 +24,7 @@
     dotnet-sdk
     nodejs
     yarn
+    pnpm
     nodejs_22
     
     # Haskell
