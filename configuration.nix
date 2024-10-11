@@ -27,7 +27,7 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Time Zone 
+  # Time Zone
   time.timeZone = "Europe/London";
 
   # Internationalization Settings
@@ -57,7 +57,7 @@
     spectacle
   ];
 
-  # X11 Keyboard Config 
+  # X11 Keyboard Config
   services.xserver.xkb = {
     layout = "pl";
     variant = "";
@@ -76,7 +76,7 @@
     Defaults	insults
   '';
 
-  # User Account Setup 
+  # User Account Setup
   users.users.marcel = {
     isNormalUser = true;
     description = "Marcel";
@@ -124,6 +124,7 @@
 
     # GAMES
     prismlauncher
+    the-powder-toy
   ];
 
   # List services that you want to enable:
@@ -131,7 +132,7 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
-  # Firewall 
+  # Firewall
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
 
