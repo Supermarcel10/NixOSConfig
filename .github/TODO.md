@@ -17,3 +17,4 @@
 - [ ] Persistent network drive configuration
 - [ ] Persistent DE setup
   - [ ] Potentially move to Hyprland
+- [ ] Fix KDE search lagging behind by .25s
