@@ -17,10 +17,7 @@
   networking.hostName = "marcel-pc";
 
   # Networking
-  networking.networkmanager = {
-    enable = true;
-    plugins = [ pkgs.networkmanager-openvpn ];
-  };
+  networking.networkmanager.enable = true;
   # networking.wireless.enable = true;
 
   # Configure network proxy if necessary
