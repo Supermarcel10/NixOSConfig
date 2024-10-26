@@ -118,6 +118,7 @@
     zoom-us
     ferdium
     tidal-hifi
+    filezilla
 
     # GAMES
     prismlauncher
