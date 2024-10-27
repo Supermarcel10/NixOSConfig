@@ -33,6 +33,9 @@
     # Elm
     elmPackages.elm
 
+    # Arduino
+    arduino-ide
+
     # Haskell
     ghc
     haskell-language-server
