@@ -18,17 +18,14 @@
   networking.hostName = "marcel-pc";
 
   # Networking
-  networking.networkmanager = {
-    enable = true;
-    plugins = [ pkgs.networkmanager-openvpn ];
-  };
+  networking.networkmanager.enable = true;
   # networking.wireless.enable = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Time Zone 
+  # Time Zone
   time.timeZone = "Europe/London";
 
   # Internationalization Settings
@@ -58,7 +55,7 @@
     spectacle
   ];
 
-  # X11 Keyboard Config 
+  # X11 Keyboard Config
   services.xserver.xkb = {
     layout = "pl";
     variant = "";
@@ -77,7 +74,7 @@
     Defaults	insults
   '';
 
-  # User Account Setup 
+  # User Account Setup
   users.users.marcel = {
     isNormalUser = true;
     description = "Marcel";
@@ -122,9 +119,11 @@
     zoom-us
     ferdium
     tidal-hifi
+    filezilla
 
     # GAMES
     prismlauncher
+    the-powder-toy
   ];
 
   # List services that you want to enable:
@@ -132,7 +131,7 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
-  # Firewall 
+  # Firewall
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
 
