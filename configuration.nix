@@ -105,6 +105,7 @@
     unixtools.whereis
     fastfetch
     neovim
+    qrencode
     flameshot
     onlyoffice-bin_latest
     wget

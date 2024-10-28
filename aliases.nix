@@ -8,6 +8,9 @@
     vim = "nvim";
     vi = "nvim";
 
+    # QR Code Generation
+    qr = "qrencode -t ansiutf8";
+
     # Change Directory Aliases
     nixos = "cd /etc/nixos/";
     desktop = "cd ~/Desktop/";
