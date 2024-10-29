@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, pkgs, agenix, ... }:
 
 {
   imports =
@@ -100,11 +100,14 @@
     localNetworkGameTransfers.openFirewall = true;
   };
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   environment.systemPackages = with pkgs; [
     # BASICS
     unixtools.whereis
     fastfetch
     neovim
+    age
+    agenix.packages.${system}.default
     qrencode
     flameshot
     onlyoffice-bin_latest
