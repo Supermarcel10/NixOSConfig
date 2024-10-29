@@ -9,7 +9,7 @@
 - [ ] Firefox PIP is not always on top
 - [ ] IDE Git configuration is not persistent (in a neat manner)
 - [ ] IDE persistent settings
-- [ ] Persistent Secrets
+- [x] Persistent Secrets
   - [ ] Persistent WakaAPI (~/.wakatime.cfg)
 - [ ] Persistent Bash profile
 - [ ] Persistent VIM profile
