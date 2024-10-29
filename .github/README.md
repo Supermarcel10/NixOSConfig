@@ -5,11 +5,17 @@ This repository contains my personal NixOS configuration files.
 > "In the world of NixOS, you don't reinstall your computer - you redefine it."
 
 ## 📚 Table of Contents
+- [Jump Links](#-jump-links)
 - [What is Nix?](#-what-is-nix--nixos)
-- [How Nix Works](#-how-nix-works)
+- [How Nix Works](#%EF%B8%8F-how-nix-works)
 - [Repository Structure](#-repository-structure)
 - [Usage](#-usage)
 - [License](#-license)
+
+## 🦘 Jump Links
+This section is used to jump between submodules of this repository, for easier management.
+
+[NixOsConfig-Secrets](https://github.com/Supermarcel10/NixOSConfig-Secrets) (PRIVATE)
 
 ## 🔧 What is Nix / NixOS?
 
@@ -35,6 +41,7 @@ Nix uses a functional approach to package management and system configuration:
 ## 📁 Repository Structure
 
 - `configuration.nix`: Main NixOS configuration file
+- `secrets/`: Directory containing encrypted files used for storing secrets. [(private repo)](https://github.com/Supermarcel10/NixOSConfig-Secrets)
 - TBD...
 
 ## 🚀 Usage
