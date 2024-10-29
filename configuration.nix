@@ -110,6 +110,7 @@
     onlyoffice-bin_latest
     wget
     btop
+    tree
     lm_sensors
     fanctl
 
