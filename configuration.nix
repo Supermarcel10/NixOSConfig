@@ -8,6 +8,7 @@
       ./development.nix
       ./sound.nix
       ./aliases.nix
+      ./secrets/secrets.nix
     ];
 
   # Bootloader
@@ -74,15 +75,23 @@
     Defaults	insults
   '';
 
+  # Group Setup
+  users.groups.secret-manager = {};
+
   # User Account Setup
   users.users.marcel = {
     isNormalUser = true;
     description = "Marcel";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "secret-manager" "wheel" ];
     packages = with pkgs; [
     #  thunderbird
     ];
   };
+
+  # Set up /etc/nixos/secrets/ directory permissions
+  systemd.tmpfiles.rules = [
+    "z /etc/nixos/secrets/** 0775 root secret-manager -"
+  ];
 
   # Allow Unfree Packages
   nixpkgs.config.allowUnfree = true;
