@@ -1,2 +1,6 @@
 .idea/
 hardware-configuration.nix
+
+# Safety net to prevent accidental push of unencrypted keys
+*key*
+*token*
