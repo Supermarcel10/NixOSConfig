@@ -1,3 +1,4 @@
 [submodule "secrets"]
 	path = secrets
 	url = https://github.com/Supermarcel10/NixOSConfig-Secrets
+	active = main
