@@ -15,7 +15,7 @@ This repository contains my personal NixOS configuration files.
 ## 🦘 Jump Links
 This section is used to jump between submodules of this repository, for easier management.
 
-[NixOsConfig-Secrets](https://github.com/Supermarcel10/NixOSConfig-Secrets) (PRIVATE)
+🔐 [SECRETS](https://github.com/Supermarcel10/NixOSConfig-Secrets) (PRIVATE & ENCRYPTED)
 
 ## 🔧 What is Nix / NixOS?
 
