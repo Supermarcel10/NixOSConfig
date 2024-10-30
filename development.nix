@@ -20,6 +20,7 @@
     openjdk21
     python311
     rustc
+    rustup
     cargo
     gcc
     clang
