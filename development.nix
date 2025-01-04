@@ -10,9 +10,6 @@
     jetbrains.idea-ultimate
     jetbrains.clion
 
-    # VSCode IDE
-    vscode
-
     # Development Tools & Programming Languages
     git
     docker
@@ -20,7 +17,6 @@
     openjdk21
     python311
     rustc
-    rustup
     cargo
     gcc
     clang
@@ -30,17 +26,6 @@
     yarn
     pnpm
     nodejs_22
-
-    # Elm
-    elmPackages.elm
-
-    # Arduino
-    arduino-ide
-
-    # Haskell
-    ghc
-    haskell-language-server
-    cabal-install
   ];
 
   environment.variables = {
