@@ -114,6 +114,8 @@
     unixtools.whereis
     fastfetch
     neovim
+    killall
+    niv
     age
     agenix.packages.${system}.default
     qrencode
