@@ -135,6 +135,7 @@
     ferdium
     tidal-hifi
     filezilla
+    vlc
 
     # GAMES
     prismlauncher
