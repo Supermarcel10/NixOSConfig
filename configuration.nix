@@ -16,7 +16,21 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.initrd.luks.devices."luks-1ede3cde-aee5-4e17-9126-a3efadc6b719".device = "/dev/disk/by-uuid/1ede3cde-aee5-4e17-9126-a3efadc6b719";
+  boot.supportedFilesystems = [ "ntfs" ];
   networking.hostName = "marcel-pc";
+
+  fileSystems."/run/media/marcel/win_os" = {
+    device = "/dev/nvme0n1p3";
+    fsType = "ntfs-3g";
+    options = [
+      "rw"
+      "uid=1000"
+      "gid=1000"
+      "umask=0022"
+      "noauto"
+      "x-systemd.automount"
+    ];
+  };
 
   # Networking
   networking.networkmanager.enable = true;
