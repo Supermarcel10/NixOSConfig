@@ -19,6 +19,8 @@
   boot.supportedFilesystems = [ "ntfs" ];
   networking.hostName = "marcel-pc";
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   fileSystems."/run/media/marcel/win_os" = {
     device = "/dev/nvme0n1p3";
     fsType = "ntfs-3g";
