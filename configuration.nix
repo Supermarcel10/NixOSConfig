@@ -140,6 +140,9 @@
     # GAMES
     prismlauncher
     the-powder-toy
+
+    # TEMP
+    chromium
   ];
 
   # List services that you want to enable:
