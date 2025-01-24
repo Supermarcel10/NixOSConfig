@@ -1,6 +1,9 @@
 - [ ] Flameshot (or some alternative screenshot tool)
 	- [ ] Keyboard Shortcuts
     - [ ] Visual Issues
+- [ ] Find a replacement for image viewer.
+- [ ] Configure nvim
+- [ ] Configure terminal
 - [ ] Pipewire
   - [ ] Audio is a lot quieter than usual (seems to be more exponential)
   - [ ] Loopback issues in Discord calls, where the other user can hear some of the background sounds
