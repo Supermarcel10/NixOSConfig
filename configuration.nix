@@ -22,7 +22,7 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   fileSystems."/run/media/marcel/win_os" = {
-    device = "/dev/nvme0n1p3";
+    device = "/dev/disk/by-uuid/2A40A6FA40A6CC3F";
     fsType = "ntfs-3g";
     options = [
       "rw"
