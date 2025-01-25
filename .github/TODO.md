@@ -4,6 +4,7 @@
 - [ ] Find a replacement for image viewer.
 - [ ] Configure nvim
 - [ ] Configure terminal
+- [ ] Configure proper persistent networking DNS (Cloudflare)
 - [ ] Pipewire
   - [ ] Audio is a lot quieter than usual (seems to be more exponential)
   - [ ] Loopback issues in Discord calls, where the other user can hear some of the background sounds
