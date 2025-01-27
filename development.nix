@@ -16,8 +16,9 @@
     docker-client
     openjdk21
     python311
-    rustc
+    rustup
     cargo
+		mold # Drop in replacement for LLVM lld linkers
     gcc
     clang
     cmake
@@ -30,6 +31,10 @@
 
   environment.variables = {
     PYTHON = "${pkgs.python311}/bin/python";
+
+		CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER = "${pkgs.mold}/bin/mold";
+    RUSTFLAGS = "-C linker=clang -C link-arg=-fuse-ld=mold";
+    CARGO_BUILD_TARGET = "x86_64-unknown-linux-gnu";
   };
 
   programs.java = {
