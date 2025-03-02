@@ -1,18 +1,18 @@
 { config, pkgs, agenix, ... }:
 
 {
-  imports =
-    [
+	imports =
+		[
 			./locale.nix
-      ./networking.nix
+			./networking.nix
 			./sound.nix
 			./mouse.nix
-    ];
+		];
 
-  # Sudo Setup
-  security.sudo.extraConfig = ''
-    Defaults    timestamp_timeout=30
-    Defaults    passwd_tries=3
-    Defaults    insults
-  '';
+	# Sudo Setup
+	security.sudo.extraConfig = ''
+		Defaults		timestamp_timeout=30
+		Defaults		passwd_tries=3
+		Defaults		insults
+	'';
 }
