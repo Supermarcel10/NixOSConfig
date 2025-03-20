@@ -31,9 +31,7 @@
 
 	environment.variables = {
 		PYTHON = "${pkgs.python311}/bin/python";
-
-		CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER = "${pkgs.mold}/bin/mold";
-		RUSTFLAGS = "-C linker=clang -C link-arg=-fuse-ld=mold";
+		RUSTFLAGS = "-C link-arg=-fuse-ld=mold";
 		CARGO_BUILD_TARGET = "x86_64-unknown-linux-gnu";
 	};
 
