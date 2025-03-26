@@ -1,13 +1,14 @@
 {
 	inputs = {
 		nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+		nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 		agenix = {
 			url = "github:ryantm/agenix";
 			inputs.darwin.follows = "";
 		};
 	};
 
-	outputs = { self, nixpkgs, agenix }: {
+	outputs = { self, nixpkgs, nixpkgs-unstable, agenix, ... }: {
 		nixosConfigurations = {
 			marcel-pc = nixpkgs.lib.nixosSystem {
 				system = "x86_64-linux";
@@ -31,6 +32,13 @@
 				specialArgs = {
 					inherit agenix;
 				};
+			};
+
+			E01 = nixpkgs-unstable.lib.nixosSystem {
+				system = "x86_64-linux";
+				modules = [
+					./devices/E01/configuration.nix
+				];
 			};
 		};
 	};
