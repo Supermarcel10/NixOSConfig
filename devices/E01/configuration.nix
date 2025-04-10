@@ -13,6 +13,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+	# Configure hostname	
+	networking.hostName = "E01";
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "pl";
