@@ -1,8 +1,5 @@
 { config, lib, pkgs, ... }:
 
-# Nvidia Configuration
-let
-in
 {
 	services.xserver.videoDrivers = ["nvidia"];
 
