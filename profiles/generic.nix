@@ -47,7 +47,28 @@ in
                                 "browser.newtabpage.activity-stream.showSponsored" = lock-false;
                                 "browser.newtabpage.activity-stream.system.showSponsored" = lock-false;
                                 "browser.newtabpage.activity-stream.showSponsoredTopSites" = lock-false;
+
+                                # Tab Groups
                                 "browser.tabs.groups.enabled" = lock-true;
+
+                                # Performance Tweaks
+                                # TODO: Make forced GPU acceleration for devices with dedicated GPU rather than all
+                                # "gfx.webrender.all" = lock-true;
+                                # "layers.acceleration.force-enabled" = lock-true;
+                                "accessibility.force_disabled" = 1;
+                                "browser.cache.memory.capacity" = 1024 * 1024; # 1024 MB
+                                "browser.cache.disk.enable" = false; # Force using memory
+
+                                # Responsivness Tweaks (Faster search, more aggressive preloading, etc)
+                                "network.http.max-persistent-connections-per-server" = 10;
+                                "network.http.max-connections" = 1024;
+                                "network.dns.disablePrefetch" = lock-false;
+                                "network.dns.disablePrefetchFromHTTPS" = lock-false; # Faster Pageload plugin
+                                "network.predictor.enabled" = lock-true;
+                                "network.predictor.enable-prefetch" = lock-true;
+                                "network.prefetch-next" = lock-true;
+                                "nglayout.initialpaint.delay" = 0;
+                                "nglayout.initialpaint.delay_in_oopif" = 0;
                         };
                 };
         };
