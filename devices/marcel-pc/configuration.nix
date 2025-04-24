@@ -22,7 +22,7 @@
   boot.supportedFilesystems = [ "ntfs" ];
   networking.hostName = "marcel-pc";
 
-	boot.kernelPackages = pkgs.linuxPackages_latest;
+	boot.kernelPackages = pkgs.linuxPackages_zen;
 
 	# Mount NTFS drive
 	fileSystems."/run/media/marcel/win_os" = {
