@@ -96,6 +96,8 @@ in
 
 		# GENERAL APPS
 		obsidian
+		obs-studio
+		blender
 		vesktop # Discord without broken screenshare
 		teams-for-linux
 		zoom-us
