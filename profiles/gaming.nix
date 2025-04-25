@@ -9,6 +9,13 @@
 	};
 
 	environment.systemPackages = with pkgs; [
+		(lutris.override {
+			extraPkgs = pkgs: [
+				gamescope
+				gamemode
+				mangohud
+      ];
+    })
 		prismlauncher
 		the-powder-toy
 	];
