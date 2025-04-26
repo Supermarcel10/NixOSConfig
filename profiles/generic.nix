@@ -97,7 +97,10 @@ in
 		# GENERAL APPS
 		obsidian
 		obs-studio
-		blender
+		(pkgs.blender.override {
+      cudaSupport = true;
+      inherit (pkgs) cudaPackages;
+    })
 		vesktop # Discord without broken screenshare
 		teams-for-linux
 		zoom-us
