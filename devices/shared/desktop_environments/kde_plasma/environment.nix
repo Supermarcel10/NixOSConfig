@@ -11,6 +11,8 @@
 	# Override KDE Plasma packages
 	environment.plasma6.excludePackages = with pkgs.kdePackages; [
 		spectacle
+		kwalletmanager
+		kwrited
 	];
 
 	# TODO: Copy over theme dotfile
