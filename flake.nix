@@ -2,10 +2,7 @@
 	inputs = {
 		nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
 		nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-		agenix = {
-			url = "github:ryantm/agenix";
-			inputs.darwin.follows = "";
-		};
+		agenix.url = "github:ryantm/agenix";
 	};
 
 	outputs = { self, nixpkgs, nixpkgs-unstable, agenix, ... }: {
