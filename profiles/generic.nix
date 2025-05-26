@@ -11,6 +11,9 @@ let
         };
 in
 {
+  imports = [
+		./../apps/kitty.nix
+  ];
   # TODO: Separate browser and create configurations
         # https://discourse.nixos.org/t/declare-firefox-extensions-and-settings/36265
   programs.firefox = {
@@ -93,6 +96,7 @@ in
 		tree
 		lm_sensors
 		fanctl
+		ripgrep
 
 		# GENERAL APPS
 		obsidian
@@ -108,5 +112,7 @@ in
 		tidal-hifi
 		filezilla
 		vlc
+		texliveFull
+		inkscape
 	];
 }
