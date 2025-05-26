@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 
 {
-	services.pulseaudio.enable = true;
 	security.rtkit.enable = true;
 	services.pipewire = {
 		enable = true;
@@ -10,6 +9,5 @@
 				support32Bit = true;
 		};
 		pulse.enable = true;
-		#jack.enable = true;
 	};
 }
