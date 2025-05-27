@@ -14,8 +14,12 @@
 				gamescope
 				gamemode
 				mangohud
+				wineWowPackages.waylandFull
       ];
     })
+
+		gamescope
+		mangohud
 		prismlauncher
 		the-powder-toy
 	];
