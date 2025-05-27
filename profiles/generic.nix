@@ -11,9 +11,9 @@ let
         };
 in
 {
-  imports = [
+	imports = [
 		./../apps/kitty.nix
-  ];
+	];
   # TODO: Separate browser and create configurations
         # https://discourse.nixos.org/t/declare-firefox-extensions-and-settings/36265
   programs.firefox = {
