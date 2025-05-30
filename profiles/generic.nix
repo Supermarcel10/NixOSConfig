@@ -1,4 +1,4 @@
-{ config, pkgs, agenix, ... }:
+{ config, pkgs, agenix, unstable, ... }:
 
 let
         lock-false = {
@@ -97,6 +97,7 @@ in
 		lm_sensors
 		fanctl
 		ripgrep
+		unstable.lact
 
 		# GENERAL APPS
 		obsidian
@@ -115,4 +116,14 @@ in
 		texliveFull
 		inkscape
 	];
+
+	systemd.services.lact = {
+	   description = "AMDGPU Control Daemon";
+	   after = ["multi-user.target"];
+	   wantedBy = ["multi-user.target"];
+	   serviceConfig = {
+	     ExecStart = "${unstable.lact}/bin/lact daemon";
+	   };
+	   enable = true;
+	 };
 }
