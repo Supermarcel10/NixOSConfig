@@ -1,7 +1,7 @@
 {
 	inputs = {
 		nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-		nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+		nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 		agenix.url = "github:ryantm/agenix";
 	};
 
@@ -16,6 +16,10 @@
 
 				specialArgs = {
 					inherit agenix;
+					unstable = import nixpkgs-unstable {
+						system = "x86_64-linux";
+						config.allowUnfree = true;
+					};
 				};
 			};
 
