@@ -11,9 +11,7 @@
 	# Override KDE Plasma packages
 	environment.plasma6.excludePackages = with pkgs.kdePackages; [
 		spectacle
-		kwalletmanager
-		kwrited
-		ksshaskpass
+		konsole
 	];
 
 	programs.ssh.askPassword = "";
@@ -24,5 +22,4 @@
 	};
 
 	# TODO: Copy over theme dotfile
-
 }
