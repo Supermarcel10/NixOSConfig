@@ -1,15 +1,5 @@
 { config, pkgs, agenix, unstable, ... }:
 
-let
-        lock-false = {
-                Value = false;
-                Status = "locked";
-        };
-        lock-true = {
-                Value = true;
-                Status = "locked";
-        };
-in
 {
 	imports = [
 		./../apps/kitty.nix
