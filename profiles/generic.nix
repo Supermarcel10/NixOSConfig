@@ -43,7 +43,7 @@
 		ferdium
 		tidal-hifi
 		filezilla
-		vlc
+		mpv
 		texliveFull
 		inkscape
 	];
