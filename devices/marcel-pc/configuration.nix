@@ -18,26 +18,25 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-	boot.initrd.luks.devices."luks-1ede3cde-aee5-4e17-9126-a3efadc6b719".device = "/dev/disk/by-uuid/1ede3cde-aee5-4e17-9126-a3efadc6b719";
   boot.supportedFilesystems = [ "ntfs" ];
+
   networking.hostName = "marcel-pc";
 
 	boot.kernelPackages = pkgs.linuxPackages_zen;
 
 	# Mount NTFS drive
-	fileSystems."/run/media/marcel/win_os" = {
-    device = "/dev/disk/by-uuid/2A40A6FA40A6CC3F";
-    fsType = "ntfs-3g";
-    options = [
-      "rw"
-      "user=marcel"
-      "group=users"
-      "umask=0022"
-      "noauto"
-      "x-systemd.automount"
-    ];
-  };
+	# fileSystems."/run/media/marcel/win_os" = {
+	#    device = "/dev/disk/by-uuid/2A40A6FA40A6CC3F";
+	#    fsType = "ntfs-3g";
+	#    options = [
+	#      "rw"
+	#      "user=marcel"
+	#      "group=users"
+	#      "umask=0022"
+	#      "noauto"
+	#      "x-systemd.automount"
+	#    ];
+	#  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
