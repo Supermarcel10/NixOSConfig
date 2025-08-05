@@ -45,6 +45,14 @@ in
 				"browser.newtabpage.activity-stream.showSponsored" = lock-false;
 				"browser.newtabpage.activity-stream.system.showSponsored" = lock-false;
 				"browser.newtabpage.activity-stream.showSponsoredTopSites" = lock-false;
+				"browser.urlbar.suggest.trending" = lock-false;
+				"browser.urlbar.suggest.weather" = lock-false;
+				"browser.urlbar.suggest.addons" = lock-false;
+				"browser.urlbar.suggest.calculator" = lock-false;
+				"browser.urlbar.suggest.clipboard" = lock-false;
+				"browser.urlbar.suggest.engines" = lock-false;
+				"browser.urlbar.suggest.fakespot" = lock-false;
+				"browser.urlbar.suggest.pocket" = lock-false;
 
 				# Tab Groups
 				"browser.tabs.groups.enabled" = lock-true;
