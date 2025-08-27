@@ -38,6 +38,7 @@
       inherit (pkgs) cudaPackages;
     })
 		vesktop # Discord without broken screenshare
+		cinny # Matrix Protocol Client
 		teams-for-linux
 		zoom-us
 		ferdium
