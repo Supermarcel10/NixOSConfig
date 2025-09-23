@@ -8,6 +8,7 @@
       # TODO: Find a neater way to have neater shared configs
       ./../shared/configuration.nix
 			./../shared/desktop_environments/kde_plasma/environment.nix
+			,/../shared/printing.nix
 
       # TODO: Find a neater way to have app profiles
       ./../../profiles/generic.nix
@@ -28,9 +29,6 @@
 
   # Configure console keymap
   console.keyMap = "pl2";
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.marcel = {

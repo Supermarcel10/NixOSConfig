@@ -9,6 +9,7 @@
       # TODO: Find a neater way to have neater shared configs
       ./../shared/configuration.nix
 			./../shared/desktop_environments/kde_plasma/environment.nix
+			./../shared/printing.nix
 
       # TODO: Find a neater way to have app profiles
       ./../../profiles/generic.nix
@@ -24,20 +25,6 @@
 
 	boot.kernelPackages = pkgs.linuxPackages_zen;
 
-	# Mount NTFS drive
-	# fileSystems."/run/media/marcel/win_os" = {
-	#    device = "/dev/disk/by-uuid/2A40A6FA40A6CC3F";
-	#    fsType = "ntfs-3g";
-	#    options = [
-	#      "rw"
-	#      "user=marcel"
-	#      "group=users"
-	#      "umask=0022"
-	#      "noauto"
-	#      "x-systemd.automount"
-	#    ];
-	#  };
-
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "pl";
@@ -46,9 +33,6 @@
 
   # Configure console keymap
   console.keyMap = "pl2";
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
 	# Group Setup
   users.groups.secret-manager = {};
