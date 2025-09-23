@@ -1,13 +1,6 @@
 { config, pkgs, agenix, ... }:
 
 {
-	imports =
-		[
-			./sound.nix
-			./aliases.nix
-			./secrets/secrets.nix
-		];
-
 	# Bootloader
 	boot.loader.systemd-boot.enable = true;
 	boot.loader.efi.canTouchEfiVariables = true;
@@ -39,9 +32,6 @@
 
 	# General Keyboard Config
 	console.keyMap = "pl2";
-
-	# Printing CUPS Service
-	services.printing.enable = true;
 
 	# Group Setup
 	users.groups.secret-manager = {};
