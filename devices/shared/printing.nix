@@ -8,7 +8,7 @@
 
   services.avahi = {
     enable = true;
-    nssmdns = true; # Changed from nssmdns4
+    nssmdns4 = true;
     openFirewall = true;
   };
 }
