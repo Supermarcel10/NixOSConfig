@@ -4,7 +4,7 @@
   imports =
     [
       ./hardware-configuration.nix
-			./../shared/hardware/nvidia-gpu.nix
+			./../shared/hardware/amd-gpu.nix
 
       # TODO: Find a neater way to have neater shared configs
       ./../shared/configuration.nix
