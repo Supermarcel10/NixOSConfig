@@ -10,6 +10,9 @@
 		jetbrains.idea-ultimate
 		jetbrains.clion
 
+		# Zed IDE
+		zed-editor
+
 		# Development Tools & Programming Languages
 		git
 		docker
