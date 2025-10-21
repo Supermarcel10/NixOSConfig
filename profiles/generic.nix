@@ -32,6 +32,7 @@
 
 		# GENERAL APPS
 		obsidian
+		grayjay
 		obs-studio
 		(pkgs.blender.override {
       cudaSupport = true;
