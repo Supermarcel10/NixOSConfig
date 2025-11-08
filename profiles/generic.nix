@@ -23,7 +23,7 @@
 		flameshot
 		onlyoffice-bin_latest
 		wget
-		btop
+		btop-rocm
 		tree
 		lm_sensors
 		fanctl
