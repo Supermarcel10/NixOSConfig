@@ -13,7 +13,6 @@ in
 {
 	programs.firefox = {
 		enable = true;
-		package = pkgs.firefox-wayland;
 
 		/* ---- POLICIES ---- */
 		# Check about:policies#documentation for options.

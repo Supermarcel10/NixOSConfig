@@ -22,7 +22,7 @@
 		agenix.packages.${system}.default
 		qrencode
 		flameshot
-		onlyoffice-bin_latest
+		onlyoffice-desktopeditors
 		wget
 		btop-rocm
 		tree
@@ -40,7 +40,6 @@
       inherit (pkgs) cudaPackages;
     })
 		vesktop # Discord without broken screenshare
-		cinny-desktop # Matrix Protocol Client
 		teams-for-linux
 		zoom-us
 		ferdium

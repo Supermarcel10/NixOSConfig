@@ -7,7 +7,7 @@
 
 	outputs = { self, nixpkgs, nixpkgs-unstable, agenix, ... }: {
 		nixosConfigurations = {
-			marcel-pc = nixpkgs.lib.nixosSystem {
+			marcel-pc = nixpkgs-unstable.lib.nixosSystem {
 				system = "x86_64-linux";
 				modules = [
 					./devices/marcel-pc/configuration.nix
