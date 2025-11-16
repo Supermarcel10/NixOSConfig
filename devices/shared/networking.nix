@@ -1,8 +1,14 @@
 { config, pkgs, ... }:
 
 {
-	networking.networkmanager.enable = true;
-	networking.networkmanager.dns = "systemd-resolved";
+	networking.networkmanager = {
+		enable = true;
+		dns = "systemd-resolved";
+
+		plugins = with pkgs; [
+			networkmanager-openvpn
+		];
+	};
 
 	services.resolved = {
 		enable = true;
