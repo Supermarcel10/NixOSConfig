@@ -6,8 +6,8 @@
 		jetbrains.webstorm
 		jetbrains.rust-rover
 		jetbrains.rider
-		jetbrains.pycharm-professional
-		jetbrains.idea-ultimate
+		jetbrains.pycharm
+		jetbrains.idea
 		jetbrains.clion
 
 		# Zed IDE
