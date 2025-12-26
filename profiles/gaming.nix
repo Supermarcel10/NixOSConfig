@@ -8,6 +8,8 @@
 		localNetworkGameTransfers.openFirewall = true;
 	};
 
+	programs.gamemode.enable = true;
+
 	environment.systemPackages = with pkgs; [
 		(lutris.override {
 			extraPkgs = pkgs: [
