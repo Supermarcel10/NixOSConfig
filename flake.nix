@@ -1,13 +1,13 @@
 {
 	inputs = {
-		nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+		nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 		nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 		agenix.url = "github:ryantm/agenix";
 	};
 
 	outputs = { self, nixpkgs, nixpkgs-unstable, agenix, ... }: {
 		nixosConfigurations = {
-			marcel-pc = nixpkgs-unstable.lib.nixosSystem {
+			marcel-pc = nixpkgs.lib.nixosSystem {
 				system = "x86_64-linux";
 				modules = [
 					./devices/marcel-pc/configuration.nix
