@@ -15,6 +15,7 @@
 
 		# Development Tools & Programming Languages
 		git
+		gh
 		docker
 		docker-client
 		openjdk21
