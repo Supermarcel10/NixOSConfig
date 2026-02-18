@@ -24,7 +24,7 @@
 
   networking.hostName = "marcel-pc";
 
-	boot.kernelPackages = pkgs.linuxPackages_zen;
+	boot.kernelPackages = pkgs.linuxPackages_6_12;
 
   # Configure keymap in X11
   services.xserver.xkb = {
