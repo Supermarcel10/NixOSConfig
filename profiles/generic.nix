@@ -39,7 +39,7 @@
       cudaSupport = true;
       inherit (pkgs) cudaPackages;
     })
-		vesktop # Discord without broken screenshare
+		legcord # Discord replacement
 		teams-for-linux
 		zoom-us
 		ferdium
