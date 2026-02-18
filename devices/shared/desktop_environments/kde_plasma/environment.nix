@@ -16,10 +16,5 @@
 
 	programs.ssh.askPassword = "";
 
-	environment.sessionVariables = {
-		KDE_WALLET_SERVICE = "";
-		KDE_WALLETD_AUTOSTART = "false";
-	};
-
 	# TODO: Copy over theme dotfile
 }
