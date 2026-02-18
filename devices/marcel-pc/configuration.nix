@@ -8,6 +8,7 @@
 
       # TODO: Find a neater way to have neater shared configs
       ./../shared/configuration.nix
+      ./../shared/aliases.nix
 			./../shared/desktop_environments/kde_plasma/environment.nix
 			./../shared/printing.nix
 
