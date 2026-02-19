@@ -23,6 +23,5 @@
     gamescope
     mangohud
     prismlauncher
-    the-powder-toy
   ];
 }
