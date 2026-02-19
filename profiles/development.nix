@@ -4,11 +4,8 @@
   environment.systemPackages = with pkgs; [
     # JetBrains IDEs
     jetbrains.webstorm
-    jetbrains.rust-rover
     jetbrains.rider
-    jetbrains.pycharm
     jetbrains.idea
-    jetbrains.clion
 
     # Zed IDE
     zed-editor
