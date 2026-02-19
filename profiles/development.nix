@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
 	environment.systemPackages = with pkgs; [
@@ -24,6 +24,8 @@
 		cargo
 		mold # Drop in replacement for LLVM lld linkers
 		gcc
+		nil # LSP for Nix
+		nixd # LSP for Nix
 		clang
 		cmake
 		dotnet-sdk
