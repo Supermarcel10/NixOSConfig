@@ -48,7 +48,6 @@
     ];
     packages = with pkgs; [
       kdePackages.kate
-      #  thunderbird
     ];
   };
 
@@ -56,14 +55,6 @@
   systemd.tmpfiles.rules = [
     "z /etc/nixos/secrets/** 0775 root secret-manager -"
   ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
 
   # DO NOT CHANGE STATE WITHOUT READING DOCS!
   system.stateVersion = "24.11";
