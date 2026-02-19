@@ -10,8 +10,8 @@
 
   # Sudo Setup
   security.sudo.extraConfig = ''
-    		Defaults		timestamp_timeout=30
-    		Defaults		passwd_tries=3
-    		Defaults		insults
-    	'';
+    Defaults		timestamp_timeout=30
+    Defaults		passwd_tries=3
+    Defaults		insults
+  '';
 }

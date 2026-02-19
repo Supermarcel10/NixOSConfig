@@ -14,8 +14,8 @@
     enable = true;
     dnssec = "true";
     extraConfig = ''
-      			DNSOverTLS=yes
-      			'';
+      DNSOverTLS=yes
+    '';
   };
 
   networking.nameservers = [
@@ -24,14 +24,4 @@
     "1.1.1.1#cloudflare-dns.com" # Cloudflare (IPv4)
     "1.0.0.1#cloudflare-dns.com" # Cloudflare Backup (IPv4)
   ];
-
-  # networking.wireless.enable = true;
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Firewall
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
 }
