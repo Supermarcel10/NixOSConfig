@@ -11,8 +11,7 @@
     ./../apps/firefox.nix
     ./../apps/via.nix
   ];
-  # TODO: Separate browser and create configurations
-  # https://discourse.nixos.org/t/declare-firefox-extensions-and-settings/36265
+
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [
     "nix-command"
