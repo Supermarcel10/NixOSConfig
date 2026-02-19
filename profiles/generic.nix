@@ -19,7 +19,7 @@
 		killall
 		niv
 		age
-		agenix.packages.${system}.default
+		agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
 		qrencode
 		flameshot
 		onlyoffice-desktopeditors

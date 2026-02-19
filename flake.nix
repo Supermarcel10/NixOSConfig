@@ -5,7 +5,7 @@
 		agenix.url = "github:ryantm/agenix";
 	};
 
-	outputs = { self, nixpkgs, nixpkgs-unstable, agenix, ... }: {
+	outputs = { nixpkgs, nixpkgs-unstable, agenix, ... }: {
 		nixosConfigurations = {
 			marcel-pc = nixpkgs.lib.nixosSystem {
 				system = "x86_64-linux";
@@ -24,7 +24,6 @@
 			};
 
 			marcel-laptop = nixpkgs.lib.nixosSystem {
-				system = "x86_64-linux";
 				modules = [
 					./devices/marcel-laptop/configuration.nix
 					agenix.nixosModules.default
