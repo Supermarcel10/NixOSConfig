@@ -52,7 +52,4 @@
   systemd.tmpfiles.rules = [
     "z /etc/nixos/secrets/** 0775 root secret-manager -"
   ];
-
-  # Allow Unfree Packages
-  nixpkgs.config.allowUnfree = true;
 }

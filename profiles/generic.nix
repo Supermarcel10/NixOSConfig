@@ -1,9 +1,4 @@
-{
-  pkgs,
-  agenix,
-  unstable,
-  ...
-}:
+{ pkgs, agenix, unstable, ... }:
 
 {
   imports = [
