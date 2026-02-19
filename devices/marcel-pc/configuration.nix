@@ -1,22 +1,21 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-			./../shared/hardware/amd-gpu.nix
+  imports = [
+    ./hardware-configuration.nix
+    ./../shared/hardware/amd-gpu.nix
 
-      # TODO: Find a neater way to have neater shared configs
-      ./../shared/configuration.nix
-      ./../shared/aliases.nix
-			./../shared/desktop_environments/kde_plasma/environment.nix
-			./../shared/printing.nix
+    # TODO: Find a neater way to have neater shared configs
+    ./../shared/configuration.nix
+    ./../shared/aliases.nix
+    ./../shared/desktop_environments/kde_plasma/environment.nix
+    ./../shared/printing.nix
 
-      # TODO: Find a neater way to have app profiles
-      ./../../profiles/generic.nix
-      ./../../profiles/development.nix
-			./../../profiles/gaming.nix
-    ];
+    # TODO: Find a neater way to have app profiles
+    ./../../profiles/generic.nix
+    ./../../profiles/development.nix
+    ./../../profiles/gaming.nix
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -24,7 +23,7 @@
 
   networking.hostName = "marcel-pc";
 
-	boot.kernelPackages = pkgs.linuxPackages_6_12;
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -35,17 +34,21 @@
   # Configure console keymap
   console.keyMap = "pl2";
 
-	# Group Setup
-  users.groups.secret-manager = {};
+  # Group Setup
+  users.groups.secret-manager = { };
 
   # User Account Setup
   users.users.marcel = {
     isNormalUser = true;
     description = "Marcel";
-    extraGroups = [ "networkmanager" "secret-manager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "secret-manager"
+      "wheel"
+    ];
     packages = with pkgs; [
-			kdePackages.kate
-    #  thunderbird
+      kdePackages.kate
+      #  thunderbird
     ];
   };
 
@@ -62,6 +65,6 @@
   #   enableSSHSupport = true;
   # };
 
-	# DO NOT CHANGE STATE WITHOUT READING DOCS!
+  # DO NOT CHANGE STATE WITHOUT READING DOCS!
   system.stateVersion = "24.11";
 }

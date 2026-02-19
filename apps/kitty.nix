@@ -5,7 +5,7 @@
     kitty
   ];
 
-	environment.variables = {
-		TERMINAL = "kitty";
-	};
+  environment.variables = {
+    TERMINAL = "kitty";
+  };
 }

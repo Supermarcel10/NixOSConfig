@@ -1,19 +1,19 @@
-{ config, lib, pkgs, ... }:
+{ ... }:
 
 {
-	services.libinput = {
-		enable = true;
+  services.libinput = {
+    enable = true;
 
-		mouse = {
-			accelProfile = "flat";
-			naturalScrolling = false;
-		};
+    mouse = {
+      accelProfile = "flat";
+      naturalScrolling = false;
+    };
 
-		touchpad = {
-			accelProfile = "flat";
-			naturalScrolling = false;
-			scrollMethod = "twofinger";
-			# TODO: Find a way to set "Integrated Right Click"
-		};
-	};
+    touchpad = {
+      accelProfile = "flat";
+      naturalScrolling = false;
+      scrollMethod = "twofinger";
+      # TODO: Find a way to set "Integrated Right Click"
+    };
+  };
 }

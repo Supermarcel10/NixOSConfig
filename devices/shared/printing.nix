@@ -1,10 +1,13 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-	# Printing
+  # Printing
   services.printing = {
     enable = true;
-    drivers = with pkgs; [ cups-filters cups-browsed ];
+    drivers = with pkgs; [
+      cups-filters
+      cups-browsed
+    ];
   };
 
   services.avahi = {
@@ -13,13 +16,13 @@
     openFirewall = true;
   };
 
-	# Scanning
+  # Scanning
   hardware.sane.enable = true;
   hardware.sane.extraBackends = [ pkgs.sane-airscan ];
   hardware.sane.disabledDefaultBackends = [ "escl" ];
 
-	# Software
-	environment.systemPackages = with pkgs; [
-		naps2 # Scanning Utility
-	];
+  # Software
+  environment.systemPackages = with pkgs; [
+    naps2 # Scanning Utility
+  ];
 }

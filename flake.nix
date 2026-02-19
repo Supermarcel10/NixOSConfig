@@ -1,38 +1,45 @@
 {
-	inputs = {
-		nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-		nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-		agenix.url = "github:ryantm/agenix";
-	};
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    agenix.url = "github:ryantm/agenix";
+  };
 
-	outputs = { nixpkgs, nixpkgs-unstable, agenix, ... }: {
-		nixosConfigurations = {
-			marcel-pc = nixpkgs.lib.nixosSystem {
-				system = "x86_64-linux";
-				modules = [
-					./devices/marcel-pc/configuration.nix
-					agenix.nixosModules.default
-				];
+  outputs =
+    {
+      nixpkgs,
+      nixpkgs-unstable,
+      agenix,
+      ...
+    }:
+    {
+      nixosConfigurations = {
+        marcel-pc = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./devices/marcel-pc/configuration.nix
+            agenix.nixosModules.default
+          ];
 
-				specialArgs = {
-					inherit agenix;
-					unstable = import nixpkgs-unstable {
-						system = "x86_64-linux";
-						config.allowUnfree = true;
-					};
-				};
-			};
+          specialArgs = {
+            inherit agenix;
+            unstable = import nixpkgs-unstable {
+              system = "x86_64-linux";
+              config.allowUnfree = true;
+            };
+          };
+        };
 
-			marcel-laptop = nixpkgs.lib.nixosSystem {
-				modules = [
-					./devices/marcel-laptop/configuration.nix
-					agenix.nixosModules.default
-				];
+        marcel-laptop = nixpkgs.lib.nixosSystem {
+          modules = [
+            ./devices/marcel-laptop/configuration.nix
+            agenix.nixosModules.default
+          ];
 
-				specialArgs = {
-					inherit agenix;
-				};
-			};
-		};
-	};
+          specialArgs = {
+            inherit agenix;
+          };
+        };
+      };
+    };
 }
