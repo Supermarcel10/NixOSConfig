@@ -35,7 +35,7 @@
 
     # GENERAL APPS
     obsidian
-    grayjay
+    unstable.grayjay
     obs-studio
     (pkgs.blender.override {
       cudaSupport = true;
@@ -44,7 +44,6 @@
     legcord # Discord replacement
     teams-for-linux
     zoom-us
-    ferdium
     tidal-hifi
     filezilla
     mpv
