@@ -5,6 +5,9 @@
     # QR Code Generation
     qr = "qrencode -t ansiutf8";
 
+    # ImageMagick Conversion
+    convert = "magick";
+
     # Change Directory Aliases
     desktop = "cd ~/Desktop/";
     downloads = "cd ~/Downloads/";

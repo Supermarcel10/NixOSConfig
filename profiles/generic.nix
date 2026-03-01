@@ -31,6 +31,7 @@
     lm_sensors
     fanctl
     ripgrep
+    imagemagick
     unstable.lact
 
     # GENERAL APPS
