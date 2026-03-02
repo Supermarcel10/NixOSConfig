@@ -48,6 +48,7 @@
     tidal-hifi
     filezilla
     mpv
+    texlab
     texliveFull
     inkscape
   ];
