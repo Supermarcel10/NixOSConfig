@@ -5,6 +5,9 @@
     # QR Code Generation
     qr = "qrencode -t ansiutf8";
 
+    # ripgrep Alias
+    grep = "rg";
+
     # ImageMagick Conversion
     convert = "magick";
 
