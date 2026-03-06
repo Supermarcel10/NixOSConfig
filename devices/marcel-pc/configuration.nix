@@ -25,6 +25,12 @@
 
   boot.kernelPackages = pkgs.linuxPackages_6_12;
 
+  # NixOS Rebuild Limits
+  nix.settings = {
+    max-jobs = 4;
+    cores = 14;
+  };
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "pl";
