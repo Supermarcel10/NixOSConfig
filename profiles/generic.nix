@@ -1,10 +1,13 @@
 { pkgs, agenix, unstable, ... }:
 
+let
+  paths = import ../../paths.nix;
+in
 {
   imports = [
-    ./../apps/kitty.nix
-    ./../apps/firefox.nix
-    ./../apps/via.nix
+    "${paths.apps}/kitty.nix"
+    "${paths.apps}/firefox.nix"
+    "${paths.apps}/via.nix"
   ];
 
   nixpkgs.config.allowUnfree = true;

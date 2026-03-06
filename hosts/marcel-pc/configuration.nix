@@ -1,20 +1,21 @@
 { pkgs, ... }:
 
+let
+  paths = import ../../../paths.nix;
+in
 {
   imports = [
-    ./hardware-configuration.nix
-    ./../shared/hardware/amd-gpu.nix
+    "./hardware-configuration.nix"
+    "${paths.hardware}/amd-gpu.nix"
 
-    # TODO: Find a neater way to have neater shared configs
-    ./../shared/configuration.nix
-    ./../shared/aliases.nix
-    ./../shared/desktop_environments/kde_plasma/environment.nix
-    ./../shared/printing.nix
+    "${paths.modules}/configuration.nix"
+    "${paths.modules}/aliases.nix"
+    "${paths.modules}/desktop_environments/kde_plasma/environment.nix"
+    "${paths.modules}/printing.nix"
 
-    # TODO: Find a neater way to have app profiles
-    ./../../profiles/generic.nix
-    ./../../profiles/development.nix
-    ./../../profiles/gaming.nix
+    "${paths.profiles}/generic.nix"
+    "${paths.profiles}/development.nix"
+    "${paths.profiles}/gaming.nix"
   ];
 
   boot.loader.systemd-boot.enable = true;
