@@ -19,7 +19,10 @@
     desktop = "cd ~/Desktop/";
     downloads = "cd ~/Downloads/";
 
-    # NixOS Edit
+    # NixOS
+    nfu = "nix flake update";
     nrs = "sudo nixos-rebuild switch --flake ~/.nixos#$(hostname)";
+    nrb = "sudo nixos-rebuild boot --flake ~/.nixos#$(hostname)";
+    nrbf = "nfu && nrb";
   };
 }
