@@ -37,7 +37,7 @@
         marcel-pc = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            ./devices/marcel-pc/configuration.nix
+            ./hosts/marcel-pc/configuration.nix
             agenix.nixosModules.default
             { nixpkgs.overlays = overlays; }
           ];
@@ -53,7 +53,7 @@
 
         marcel-laptop = nixpkgs.lib.nixosSystem {
           modules = [
-            ./devices/marcel-laptop/configuration.nix
+            ./hosts/marcel-laptop/configuration.nix
             agenix.nixosModules.default
             { nixpkgs.overlays = overlays; }
           ];
