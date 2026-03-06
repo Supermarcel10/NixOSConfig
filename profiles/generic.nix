@@ -45,7 +45,7 @@
     legcord # Discord replacement
     teams-for-linux
     zoom-us
-    tidal-hifi
+    unstable.tidal-hifi
     filezilla
     mpv
     texlab
