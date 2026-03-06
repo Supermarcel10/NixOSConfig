@@ -3,7 +3,6 @@
 {
   environment.systemPackages = with pkgs; [
     # JetBrains IDEs
-    jetbrains.webstorm
     jetbrains.rider
     jetbrains.idea
 
