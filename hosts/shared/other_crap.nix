@@ -1,16 +1,10 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   # Bootloader
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   boot.initrd.luks.devices."luks-1ede3cde-aee5-4e17-9126-a3efadc6b719".device =
     "/dev/disk/by-uuid/1ede3cde-aee5-4e17-9126-a3efadc6b719";
   boot.supportedFilesystems = [ "ntfs" ];
-  networking.hostName = "marcel-pc";
-
-  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   fileSystems."/run/media/marcel/win_os" = {
     device = "/dev/disk/by-uuid/2A40A6FA40A6CC3F";
@@ -31,22 +25,8 @@
     variant = "";
   };
 
-  # General Keyboard Config
-  console.keyMap = "pl2";
-
   # Group Setup
   users.groups.secret-manager = { };
-
-  # User Account Setup
-  users.users.marcel = {
-    isNormalUser = true;
-    description = "Marcel";
-    extraGroups = [
-      "networkmanager"
-      "secret-manager"
-      "wheel"
-    ];
-  };
 
   # Set up /etc/nixos/secrets/ directory permissions
   systemd.tmpfiles.rules = [
