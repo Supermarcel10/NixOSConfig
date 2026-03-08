@@ -2,13 +2,27 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixos-raspberrypi = {
+      url = "github:nvmd/nixos-raspberrypi/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     agenix.url = "github:ryantm/agenix";
+  };
+
+  nixConfig = {
+    extra-substituters = [
+      "https://nixos-raspberrypi.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
+    ];
   };
 
   outputs =
     {
       nixpkgs,
       nixpkgs-unstable,
+      nixos-raspberrypi,
       agenix,
       ...
     }:
@@ -71,6 +85,16 @@
 
           specialArgs = {
             inherit agenix paths;
+          };
+        };
+
+        rpi5 = nixos-raspberrypi.lib.nixosSystem {
+          modules = [
+            ./hosts/rpi5/configuration.nix
+          ];
+
+          specialArgs = {
+            inherit nixos-raspberrypi paths;
           };
         };
       };
