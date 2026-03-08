@@ -13,6 +13,17 @@
       ...
     }:
     let
+      paths = {
+        modules = ./modules;
+        hardware = paths.modules + /hardware;
+        desktop_environments = paths.modules + /desktop_environments;
+
+        apps = ./apps;
+        profiles = ./profiles;
+
+        secrets = ./secrets;
+      };
+
       flameshotOverlay = final: prev: {
         flameshot = prev.flameshot.overrideAttrs (old: {
           src = final.fetchFromGitHub {
@@ -43,7 +54,7 @@
           ];
 
           specialArgs = {
-            inherit agenix;
+            inherit agenix paths;
             unstable = import nixpkgs-unstable {
               system = "x86_64-linux";
               config.allowUnfree = true;
@@ -59,7 +70,7 @@
           ];
 
           specialArgs = {
-            inherit agenix;
+            inherit agenix paths;
           };
         };
       };

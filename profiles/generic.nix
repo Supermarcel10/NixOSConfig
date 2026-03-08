@@ -1,13 +1,9 @@
-{ pkgs, agenix, unstable, ... }:
-
-let
-  paths = import ../../paths.nix;
-in
+{ pkgs, agenix, unstable, paths, ... }:
 {
   imports = [
-    "${paths.apps}/kitty.nix"
-    "${paths.apps}/firefox.nix"
-    "${paths.apps}/via.nix"
+    (paths.apps + /kitty.nix)
+    (paths.apps + /firefox.nix)
+    (paths.apps + /via.nix)
   ];
 
   nixpkgs.config.allowUnfree = true;
