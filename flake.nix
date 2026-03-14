@@ -7,6 +7,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix.url = "github:ryantm/agenix";
+    legcord = {
+      url = "github:Legcord/Legcord/dev";
+      flake = false;
+    };
   };
 
   nixConfig = {
@@ -24,6 +28,7 @@
       nixpkgs-unstable,
       nixos-raspberrypi,
       agenix,
+      legcord,
       ...
     }:
     let
@@ -55,7 +60,22 @@
           '';
         });
       };
-      overlays = [ flameshotOverlay ];
+
+      legcordOverlay = final: prev: {
+        legcord = prev.legcord.overrideAttrs (old: {
+          src = legcord;
+          version = "dev";
+          pnpmDeps = final.fetchPnpmDeps {
+            pname = "legcord";
+            version = "dev";
+            src = legcord;
+            fetcherVersion = 1;
+            hash = "sha256-9sdN5tbCCe/euTo8zRkU0C3yQ8sAufPyN8a4GeJW/Us=";
+          };
+        });
+      };
+
+      overlays = [ flameshotOverlay legcordOverlay ];
     in
     {
       nixosConfigurations = {

@@ -95,6 +95,23 @@
         "type": "github"
       }
     },
+    "legcord": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1773508192,
+        "narHash": "sha256-3EQgixE0+D+zZkltYVVcsL9hNy4Pz7lGPhvHzXcsbLQ=",
+        "owner": "Legcord",
+        "repo": "Legcord",
+        "rev": "63b3f3386b1092c7f87c98b80eed50e997b442d0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Legcord",
+        "ref": "dev",
+        "repo": "Legcord",
+        "type": "github"
+      }
+    },
     "nixos-images": {
       "inputs": {
         "nixos-stable": [
@@ -196,6 +213,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "legcord": "legcord",
         "nixos-raspberrypi": "nixos-raspberrypi",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable"
