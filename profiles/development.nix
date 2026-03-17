@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, unstable, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -7,7 +7,7 @@
     jetbrains.idea
 
     # Zed IDE
-    zed-editor
+    unstable.zed-editor
 
     # Development Tools & Programming Languages
     git
