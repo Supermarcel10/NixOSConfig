@@ -16,7 +16,7 @@
     docker-client
     openjdk21
     python311
-    rustup
+    rustc
     cargo
     mold # Drop in replacement for LLVM lld linkers
     gcc
