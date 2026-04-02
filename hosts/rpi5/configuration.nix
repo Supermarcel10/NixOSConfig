@@ -9,16 +9,18 @@
     (paths.modules + /networking.nix)
   ];
 
-  boot.loader.raspberryPi.bootloader = "kernel";
+  boot.loader.raspberry-pi.firmwarePath = "/boot/firmware";
+  boot.loader.raspberry-pi.bootloader = "kernel";
 
-  fileSystems."/" = {
-    device = "/dev/nvme0n1p2";
-    fsType = "ext4";
+  fileSystems."/boot/firmware" = {
+    device = "/dev/disk/by-label/FIRMWARE";
+    fsType = "vfat";
+    options = [ "fmask=0022" "dmask=0022" ];
   };
 
-  fileSystems."/boot" = {
-    device = "/dev/nvme0n1p1";
-    fsType = "vfat";
+  fileSystems."/" = {
+    device = "/dev/disk/by-label/NIXOS_SD";
+    fsType = "ext4";
   };
 
   networking.hostName = "rpi5";
