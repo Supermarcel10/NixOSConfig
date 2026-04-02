@@ -3,7 +3,7 @@
 {
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelParams = [
-    "amdgpu.ppfeaturemask=0xffffffff"
+    "amdgpu.ppfeaturemask=0xfffd3fff"
     "amdgpu.gpu_recovery=1"
   ];
   services.xserver.videoDrivers = [ "amdgpu" ];
