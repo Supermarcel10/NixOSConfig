@@ -20,10 +20,7 @@
 
   networking.hostName = "marcel-pc";
 
-  # CPU Optimisations (9850X3D)
-  boot.kernelParams = [ "amd_pstate=active" ];
-
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
 
   # NixOS Rebuild Limits
   nix.settings = {
