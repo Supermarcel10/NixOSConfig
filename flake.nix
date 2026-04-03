@@ -10,6 +10,7 @@
       url = "github:Legcord/Legcord/dev";
       flake = false;
     };
+    dzgui-flake.url = "github:jiriks74/dzgui.flake";
   };
 
   nixConfig = {
@@ -28,6 +29,7 @@
       nixos-raspberrypi,
       agenix,
       legcord,
+      dzgui-flake,
       ...
     }:
     let
@@ -50,8 +52,8 @@
             rev = "76d883362fa1872f3e0aa31c179c98ebbd0effff";
             sha256 = "068pp62rn1hig1xzss779rpzlrsx8ic7wk6168z2vpw8h9ma1xyx";
           };
-          patches = [];
-          nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ final.git ];
+          patches = [ ];
+          nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ final.git ];
           postPatch = ''
             mkdir -p external/Qt-Color-Widgets external/KDSingleApplication
             echo 'add_library(qtcolorwidgets INTERFACE)' > external/Qt-Color-Widgets/CMakeLists.txt
@@ -74,7 +76,10 @@
         });
       };
 
-      overlays = [ flameshotOverlay legcordOverlay ];
+      overlays = [
+        flameshotOverlay
+        legcordOverlay
+      ];
     in
     {
       nixosConfigurations = {
@@ -83,6 +88,14 @@
           modules = [
             ./hosts/marcel-pc/configuration.nix
             agenix.nixosModules.default
+            (
+              { pkgs, ... }:
+              {
+                environment.systemPackages = [
+                  dzgui-flake.packages.${pkgs.system}.dzgui
+                ];
+              }
+            )
             { nixpkgs.overlays = overlays; }
           ];
 
