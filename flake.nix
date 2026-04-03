@@ -120,8 +120,32 @@
           };
         };
 
-        rpi5 = nixos-raspberrypi.lib.nixosSystem {
+        ## Raspberry Pi Cluster
+        calisto = nixos-raspberrypi.lib.nixosSystem {
           modules = [
+            ./hosts/rpi5/names/calisto.nix
+            ./hosts/rpi5/configuration.nix
+          ];
+
+          specialArgs = {
+            inherit nixos-raspberrypi paths;
+          };
+        };
+
+        europa = nixos-raspberrypi.lib.nixosSystem {
+          modules = [
+            ./hosts/rpi5/names/europa.nix
+            ./hosts/rpi5/configuration.nix
+          ];
+
+          specialArgs = {
+            inherit nixos-raspberrypi paths;
+          };
+        };
+
+        ganymede = nixos-raspberrypi.lib.nixosSystem {
+          modules = [
+            ./hosts/rpi5/names/ganymede.nix
             ./hosts/rpi5/configuration.nix
           ];
 

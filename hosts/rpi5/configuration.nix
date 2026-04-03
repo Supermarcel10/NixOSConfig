@@ -23,13 +23,23 @@
     fsType = "ext4";
   };
 
-  networking.hostName = "rpi5";
-  networking.networkmanager.enable = true;
+  users.users.worker = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ];
+    openssh.authorizedKeys.keyFiles = [
+      ./rpi5.pub
+    ];
+  };
 
   services.openssh = {
     enable = true;
-    settings.PermitRootLogin = "yes";
+    settings = {
+      PasswordAuthentication = false;
+      PermitRootLogin = "no";
+    };
   };
+
+  security.sudo.wheelNeedsPassword = false;
 
   time.timeZone = "Europe/London";
   i18n.defaultLocale = "en_GB.UTF-8";
