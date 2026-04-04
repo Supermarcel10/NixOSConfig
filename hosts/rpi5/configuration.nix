@@ -1,4 +1,10 @@
-{ pkgs, paths, nixos-raspberrypi, ... }:
+{
+  pkgs,
+  paths,
+  nixos-raspberrypi,
+  config,
+  ...
+}:
 
 {
   imports = with nixos-raspberrypi.nixosModules; [
@@ -15,7 +21,10 @@
   fileSystems."/boot/firmware" = {
     device = "/dev/disk/by-label/FIRMWARE";
     fsType = "vfat";
-    options = [ "fmask=0022" "dmask=0022" ];
+    options = [
+      "fmask=0022"
+      "dmask=0022"
+    ];
   };
 
   fileSystems."/" = {
@@ -23,16 +32,31 @@
     fsType = "ext4";
   };
 
+  # agenix secrets
+  age.secrets.hostKey = {
+    path  = "/etc/ssh/ssh_host_ed25519_key";
+    mode  = "0600";
+    owner = "root";
+  };
+
+  age.identityPaths = [ "/etc/age/key.txt" ];
+  age.secrets.ageKey = {
+    path  = "/etc/age/key.txt";
+    mode  = "0600";
+    owner = "worker";
+  };
+
   users.users.worker = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     openssh.authorizedKeys.keyFiles = [
-      ./rpi5.pub
+      ./pi_cluster.pub
     ];
   };
 
   services.openssh = {
     enable = true;
+    hostKeys = [ ]; # disable auto-generated host keys
     settings = {
       PasswordAuthentication = false;
       PermitRootLogin = "no";
