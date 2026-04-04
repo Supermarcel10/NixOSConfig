@@ -53,6 +53,11 @@ If you want to use this configuration, or test it:
 2. Symlink or copy the configuration files to `/etc/nixos/`.
 3. Run `sudo nixos-rebuild switch` to apply the configuration.
 
+### Updating Submodules
+
+To update the submodule from the main repository run:
+`git submodule update --init --recursive --remote`
+
 ## 📄 License
 
 This configuration is released under the Unlicense License. See the [license file](https://github.com/Supermarcel10/NixOSConfig/blob/main/.github/LICENSE) for details.
