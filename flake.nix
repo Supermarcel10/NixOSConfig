@@ -5,6 +5,10 @@
     nixos-raspberrypi = {
       url = "github:nvmd/nixos-raspberrypi/main";
     };
+    secrets = {
+      url = "git+file:./secrets";
+      flake = false;
+    };
     agenix.url = "github:ryantm/agenix";
     legcord = {
       url = "github:Legcord/Legcord/dev";
@@ -27,6 +31,7 @@
       nixpkgs,
       nixpkgs-unstable,
       nixos-raspberrypi,
+      secrets,
       agenix,
       legcord,
       dzgui-flake,
@@ -41,7 +46,7 @@
         apps = ./apps;
         profiles = ./profiles;
 
-        secrets = ./secrets;
+        secrets = secrets;
       };
 
       flameshotOverlay = final: prev: {
@@ -125,10 +130,11 @@
           modules = [
             ./hosts/rpi5/names/calisto.nix
             ./hosts/rpi5/configuration.nix
+            agenix.nixosModules.default
           ];
 
           specialArgs = {
-            inherit nixos-raspberrypi paths;
+            inherit nixos-raspberrypi paths agenix;
           };
         };
 
@@ -136,10 +142,11 @@
           modules = [
             ./hosts/rpi5/names/europa.nix
             ./hosts/rpi5/configuration.nix
+            agenix.nixosModules.default
           ];
 
           specialArgs = {
-            inherit nixos-raspberrypi paths;
+            inherit nixos-raspberrypi paths agenix;
           };
         };
 
@@ -147,10 +154,11 @@
           modules = [
             ./hosts/rpi5/names/ganymede.nix
             ./hosts/rpi5/configuration.nix
+            agenix.nixosModules.default
           ];
 
           specialArgs = {
-            inherit nixos-raspberrypi paths;
+            inherit nixos-raspberrypi paths agenix;
           };
         };
       };

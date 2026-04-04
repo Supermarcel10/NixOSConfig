@@ -336,7 +336,23 @@
         "legcord": "legcord",
         "nixos-raspberrypi": "nixos-raspberrypi",
         "nixpkgs": "nixpkgs_4",
-        "nixpkgs-unstable": "nixpkgs-unstable"
+        "nixpkgs-unstable": "nixpkgs-unstable",
+        "secrets": "secrets"
+      }
+    },
+    "secrets": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1775343610,
+        "narHash": "sha256-Ch5ThFpjj3s3wkbyhVVpOCedIy+3494g0LtwZYYWFbs=",
+        "rev": "077b206311bfc8ff0041a5c38cb8ff52cd5424c2",
+        "revCount": 7,
+        "type": "git",
+        "url": "file:./secrets"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:./secrets"
       }
     },
     "systems": {
