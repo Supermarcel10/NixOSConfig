@@ -44,7 +44,7 @@
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     openssh.authorizedKeys.keyFiles = [
-      ./pi_cluster.pub
+      ./keys/pi_cluster.pub
     ];
   };
 
