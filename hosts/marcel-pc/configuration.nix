@@ -8,6 +8,7 @@
     (paths.modules + /aliases.nix)
     (paths.desktop_environments + /kde_plasma/environment.nix)
     (paths.modules + /printing.nix)
+    (paths.modules + /cross-compilation.nix)
 
     (paths.profiles + /generic.nix)
     (paths.profiles + /development.nix)
