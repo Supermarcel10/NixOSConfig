@@ -2,7 +2,6 @@
   pkgs,
   paths,
   nixos-raspberrypi,
-  config,
   ...
 }:
 
@@ -40,11 +39,6 @@
   };
 
   age.identityPaths = [ "/etc/age/key.txt" ];
-  age.secrets.ageKey = {
-    path  = "/etc/age/key.txt";
-    mode  = "0600";
-    owner = "worker";
-  };
 
   users.users.worker = {
     isNormalUser = true;
