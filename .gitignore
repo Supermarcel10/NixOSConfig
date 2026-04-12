@@ -1,7 +1,1 @@
 .idea/
-
-# Safety net to prevent accidental push of unencrypted keys
-*key*
-*token*
-!*.age
-!keybinds.nix
