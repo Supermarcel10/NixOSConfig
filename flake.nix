@@ -128,7 +128,7 @@
         ## Raspberry Pi Cluster
         calisto = nixos-raspberrypi.lib.nixosSystem {
           modules = [
-            ./hosts/rpi5/names/calisto.nix
+            ./hosts/rpi5/nodes/calisto.nix
             ./hosts/rpi5/configuration.nix
             agenix.nixosModules.default
           ];
@@ -140,7 +140,7 @@
 
         europa = nixos-raspberrypi.lib.nixosSystem {
           modules = [
-            ./hosts/rpi5/names/europa.nix
+            ./hosts/rpi5/nodes/europa.nix
             ./hosts/rpi5/configuration.nix
             agenix.nixosModules.default
           ];
@@ -152,7 +152,7 @@
 
         ganymede = nixos-raspberrypi.lib.nixosSystem {
           modules = [
-            ./hosts/rpi5/names/ganymede.nix
+            ./hosts/rpi5/nodes/ganymede.nix
             ./hosts/rpi5/configuration.nix
             agenix.nixosModules.default
           ];
