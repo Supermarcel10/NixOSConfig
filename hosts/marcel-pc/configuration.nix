@@ -1,12 +1,15 @@
 { pkgs, paths, ... }:
+
 {
   imports = [
     ./hardware-configuration.nix
     (paths.hardware + /amd-gpu.nix)
 
+    (paths.desktop_environments + /kde_plasma/environment.nix)
+
     (paths.modules + /configuration.nix)
     (paths.modules + /aliases.nix)
-    (paths.desktop_environments + /kde_plasma/environment.nix)
+    (paths.modules + /ssh-knownhosts.nix)
     (paths.modules + /printing.nix)
     (paths.modules + /cross-compilation.nix)
 
