@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
-# install-nixos-rpi.sh - Install NixOS to a disk for Raspberry Pi.
-#
-# Usage:
-#   sudo ./install-nixos-rpi.sh --disk /dev/sda --flake .#rpi5
-#   sudo ./install-nixos-rpi.sh --root /dev/sda2 --firmware /dev/sda1 --flake .#rpi5 --skip-partitioning
-#
-# With --skip-partitioning the disk must already be partitioned and labelled:
-#   - FAT32 partition labelled FIRMWARE  (for /boot/firmware)
-#   - ext4  partition labelled NIXOS_SD  (for /)
+# Install NixOS to a disk for Raspberry Pi.
 
 set -euo pipefail
 
@@ -51,16 +43,19 @@ Pre-partitioned mode:
   --firmware <device>       Firmware (FAT32) partition  (e.g. /dev/sda1)
 
 Optional:
-  --firmware-size <size>    Size of firmware partition in parted format (default: 256MiB)
-  --generations <n>         Number of boot generations to keep in firmware (default: 0)
+  --firmware-size <size>    Size of firmware partition in parted format (default: 512MiB)
+  --generations <n>         Number of boot generations to keep in firmware (default: 1)
+  --age-identity <path>     Path to age secret key for decrypting secrets (e.g. ~/.age/keys)
+  --secrets-dir <path>      Path to directory containing .age secret files
   --help, -h                Show this help
 
 Examples:
-  # Partition /dev/nvme0n1 and install
-  sudo $0 --disk /dev/nvme0n1 --flake .#rpi5
+  # Partition /dev/sda and install with key pre-seeding
+  sudo $0 --disk /dev/sda --flake .#calisto \\
+          --age-identity ~/.age/keys --secrets-dir ./secrets
 
-  # Use existing partitions
-  sudo $0 --skip-partitioning --root /dev/sda2 --firmware /dev/sda1 --flake .#rpi5
+  # Use existing partitions, no key pre-seeding
+  sudo $0 --skip-partitioning --root /dev/sda2 --firmware /dev/sda1 --flake .#calisto
 EOF
     exit 0
 }
@@ -72,17 +67,21 @@ ROOT_DEVICE=""
 FIRMWARE_DEVICE=""
 FLAKE_REF=""
 SKIP_PARTITIONING=false
-FIRMWARE_SIZE="256MiB"
-NUM_GENERATIONS="0"
+FIRMWARE_SIZE="512MiB"
+NUM_GENERATIONS="1"
+AGE_IDENTITY=""
+SECRETS_DIR=""
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
-        --disk)           [[ $# -ge 2 ]] || die "Missing value for --disk";           DISK="$2";              shift 2 ;;
-        --root)           [[ $# -ge 2 ]] || die "Missing value for --root";           ROOT_DEVICE="$2";       shift 2 ;;
-        --firmware)       [[ $# -ge 2 ]] || die "Missing value for --firmware";       FIRMWARE_DEVICE="$2";   shift 2 ;;
-        --flake)          [[ $# -ge 2 ]] || die "Missing value for --flake";          FLAKE_REF="$2";         shift 2 ;;
-        --firmware-size)  [[ $# -ge 2 ]] || die "Missing value for --firmware-size";  FIRMWARE_SIZE="$2";     shift 2 ;;
-        --generations)    [[ $# -ge 2 ]] || die "Missing value for --generations";    NUM_GENERATIONS="$2";   shift 2 ;;
+        --disk)              [[ $# -ge 2 ]] || die "Missing value for --disk";             DISK="$2";              shift 2 ;;
+        --root)              [[ $# -ge 2 ]] || die "Missing value for --root";             ROOT_DEVICE="$2";       shift 2 ;;
+        --firmware)          [[ $# -ge 2 ]] || die "Missing value for --firmware";         FIRMWARE_DEVICE="$2";   shift 2 ;;
+        --flake)             [[ $# -ge 2 ]] || die "Missing value for --flake";            FLAKE_REF="$2";         shift 2 ;;
+        --firmware-size)     [[ $# -ge 2 ]] || die "Missing value for --firmware-size";    FIRMWARE_SIZE="$2";     shift 2 ;;
+        --generations)       [[ $# -ge 2 ]] || die "Missing value for --generations";      NUM_GENERATIONS="$2";   shift 2 ;;
+        --age-identity)      [[ $# -ge 2 ]] || die "Missing value for --age-identity";     AGE_IDENTITY="$2";      shift 2 ;;
+        --secrets-dir)       [[ $# -ge 2 ]] || die "Missing value for --secrets-dir";      SECRETS_DIR="$2";       shift 2 ;;
         --skip-partitioning) SKIP_PARTITIONING=true; shift ;;
         --help|-h) usage ;;
         *) die "Unknown argument: $1" ;;
@@ -104,6 +103,14 @@ else
     [[ -n "$DISK" ]] || die "Either --disk or --skip-partitioning + --root + --firmware is required"
     [[ -z "$ROOT_DEVICE" && -z "$FIRMWARE_DEVICE" ]] \
         || die "--root and --firmware cannot be used in partitioning mode; use --disk instead"
+fi
+
+# Validate age arguments - both must be provided together or not at all
+if [[ -n "$AGE_IDENTITY" && -z "$SECRETS_DIR" ]]; then
+    die "--age-identity requires --secrets-dir to also be set"
+fi
+if [[ -n "$SECRETS_DIR" && -z "$AGE_IDENTITY" ]]; then
+    die "--secrets-dir requires --age-identity to also be set"
 fi
 
 require_block_device() {
@@ -137,6 +144,13 @@ normalize_flake_ref() {
 
 FLAKE_REF=$(normalize_flake_ref "$FLAKE_REF")
 NIXOS_INSTALL_FLAKE="${FLAKE_REF/\#nixosConfigurations./\#}"
+
+# ─── Derive hostname from flake ref ──────────────────────────────────────────
+# Extracts the host name from the flake attribute, e.g.
+#   .#nixosConfigurations.calisto  →  calisto
+
+HOSTNAME="${FLAKE_REF##*.}"
+info "Derived hostname: ${HOSTNAME}"
 
 # ─── Partition-name helper ────────────────────────────────────────────────────
 # Appends a partition suffix that works for both /dev/sdX and /dev/nvme0nX style
@@ -299,17 +313,10 @@ cleanup() {
 
 trap cleanup EXIT
 
-# ─── Override generations helper ──────────────────────────────────────────────
-
-override_generations() {
-    printf '%s\n' "$1" | sed -E "s/(^|[[:space:]])-g[[:space:]]+[0-9]+/\\1-g $NUM_GENERATIONS/"
-}
-
 # ─── Evaluate and run a flake populate command ────────────────────────────────
 # Runs nix eval to get the shell commands, then executes them with bash.
 # The working directory is set to WORK_DIR so relative paths (e.g. ./files,
-# ./firmware) in the populate commands resolve correctly. This matches how
-# the original script and the manual instructions both work.
+# ./firmware) in the populate commands resolve correctly.
 
 run_populate_cmd() {
     local attr=$1
@@ -336,6 +343,7 @@ run_populate_cmd() {
 
 printf "${BOLD}NixOS Raspberry Pi Installer${RESET}\n"
 printf "  Flake:       %s\n" "$FLAKE_REF"
+printf "  Hostname:    %s\n" "$HOSTNAME"
 
 if "$SKIP_PARTITIONING"; then
     printf "  Mode:        pre-partitioned\n"
@@ -371,8 +379,8 @@ section "Checking flake configuration..."
 FIRMWARE_MOUNT_POINT=$(nix eval "${FLAKE_REF}.config.boot.loader.raspberry-pi.firmwarePath" --raw 2>/dev/null || true)
 if [[ -n "$FIRMWARE_MOUNT_POINT" ]]; then
     info "firmwarePath is set to: ${FIRMWARE_MOUNT_POINT}"
-    DECLARED_BOOT_FS=$(nix eval "${FLAKE_REF}.config.fileSystems" --json 2>/dev/null         | python3 -c "import sys,json; fs=json.load(sys.stdin); print(list(fs.keys()))" 2>/dev/null || true)
-    if nix eval "${FLAKE_REF}.config.fileSystems./boot" --json &>/dev/null         && ! nix eval "${FLAKE_REF}.config.fileSystems./boot/firmware" --json &>/dev/null; then
+    if nix eval "${FLAKE_REF}.config.fileSystems./boot" --json &>/dev/null \
+        && ! nix eval "${FLAKE_REF}.config.fileSystems./boot/firmware" --json &>/dev/null; then
         warn "Your flake mounts the firmware partition at /boot, but firmwarePath is"
         warn "set to '${FIRMWARE_MOUNT_POINT}'. These are inconsistent."
         warn ""
@@ -384,7 +392,9 @@ if [[ -n "$FIRMWARE_MOUNT_POINT" ]]; then
 fi
 
 section "Building system configuration..."
-TOPLEVEL=$(nix build "${FLAKE_REF}.config.system.build.toplevel" --no-link --print-out-paths) \
+TOPLEVEL=$(nix build "${FLAKE_REF}.config.system.build.toplevel" \
+    --no-link --print-out-paths \
+    --system aarch64-linux) \
     || die "nix build failed"
 success "System toplevel: ${TOPLEVEL}"
 
@@ -394,46 +404,90 @@ nixos-install \
     --root  "$ROOT_MOUNT" \
     --no-bootloader \
     --no-root-password \
+    --system "$TOPLEVEL" \
     || die "nixos-install failed"
 
 # On aarch64 the system will activate on first boot.
 
 section "Populating firmware partition..."
 
-# nixos-raspberrypi does not use sdImage.populateFirmwareCommands. Instead it
-# manages /boot/firmware through config.system.build.installBootLoader, the
-# same script the bootloader activation runs on every generation switch.
+# nixos-raspberrypi manages /boot/firmware through
+# config.system.build.installBootLoader - the same script the bootloader
+# activation runs on every generation switch. This evaluates the path and run it
+# against the built toplevel, rewriting two things:
 #
-# This evaluates that path from the flake and runs it against the built toplevel,
-# with the firmware mount point set to where it has been mounted. This is
-# equivalent to what would happen on first boot activation, but done manually
-# here since the aarch64 target cannot activate itself on the installer host.
+#   1. The generation count (-g N) to avoid the bootloader script walking the
+#      host's /nix/var/nix/profiles/system-*-link entries and copying the host's
+#      own generations onto the Pi's firmware partition.
+#
+#   2. The firmware path (-f /path) to point at the mounted partition rather
+#      than the live system path.
 INSTALL_BOOT_LOADER=$(nix eval "${FLAKE_REF}.config.system.build.installBootLoader" --raw 2>/dev/null) \
     || die "Could not evaluate config.system.build.installBootLoader from flake"
 
 info "installBootLoader: ${INSTALL_BOOT_LOADER}"
 
-# The bootloader installer needs to know where the firmware partition is.
-# nixos-raspberrypi reads boot.loader.raspberry-pi.firmwarePath at build time,
-# but the actual path on disk during install is the mount point.
 FIRMWARE_PATH=$(nix eval "${FLAKE_REF}.config.boot.loader.raspberry-pi.firmwarePath" --raw 2>/dev/null || printf '/boot/firmware')
 info "firmwarePath configured as: ${FIRMWARE_PATH}"
 
-# The -f <firmwarePath> argument must be rewritten to point at the firmware
-# partition's actual location on the installer host (under ROOT_MOUNT), not the
-# path it will have once the system has booted.
 if [[ ! -d "${ROOT_MOUNT}${FIRMWARE_PATH}" ]]; then
     die "Firmware mount point ${ROOT_MOUNT}${FIRMWARE_PATH} does not exist. Check your fileSystems config."
 fi
 
-# Rewrite -f <path> so the installer writes into mounted firmware partition
-INSTALL_CMD=$(printf '%s' "$INSTALL_BOOT_LOADER" | sed -E "s|-f[[:space:]]+[^[:space:]]+|-f ${ROOT_MOUNT}${FIRMWARE_PATH}|g")
+# Apply generation count override first, then rewrite the firmware path.
+INSTALL_CMD=$(printf '%s' "$INSTALL_BOOT_LOADER" \
+    | sed -E "s|-g[[:space:]]+[0-9]+|-g ${NUM_GENERATIONS}|g")
+INSTALL_CMD=$(printf '%s' "$INSTALL_CMD" \
+    | sed -E "s|-f[[:space:]]+[^[:space:]]+|-f ${ROOT_MOUNT}${FIRMWARE_PATH}|g")
 
 info "Running: ${INSTALL_CMD} ${TOPLEVEL}"
 bash -c "${INSTALL_CMD} $(printf '%q' "$TOPLEVEL")" \
     || die "installBootLoader failed"
 
 success "Firmware partition populated by installBootLoader"
+
+# ─── Pre-seed age and host keys ───────────────────────────────────────────────
+# The SSH host key and the age identity are pre-seeded from the secrets directory
+# so the Pi can decrypt its own agenix secrets autonomously from the very first
+# activation, without any manual intervention.
+
+if [[ -n "$AGE_IDENTITY" && -n "$SECRETS_DIR" ]]; then
+    section "Pre-seeding SSH host key and age identity for ${HOSTNAME}..."
+
+    HOST_KEY_SECRET="${SECRETS_DIR}/${HOSTNAME}-host-key.age"
+    AGE_KEY_SECRET="${SECRETS_DIR}/${HOSTNAME}-age-key.age"
+
+    [[ -f "$HOST_KEY_SECRET" ]] || die "Host key secret not found: ${HOST_KEY_SECRET}"
+    [[ -f "$AGE_KEY_SECRET"  ]] || die "Age key secret not found: ${AGE_KEY_SECRET}"
+    [[ -f "$AGE_IDENTITY"    ]] || die "Age identity file not found: ${AGE_IDENTITY}"
+
+    # Pre-seed SSH host key
+    info "Decrypting and placing SSH host key..."
+    mkdir -p "$ROOT_MOUNT/etc/ssh"
+    chmod 755 "$ROOT_MOUNT/etc/ssh"
+    age --decrypt -i "$AGE_IDENTITY" "$HOST_KEY_SECRET" \
+        | install -m 600 -o root /dev/stdin "$ROOT_MOUNT/etc/ssh/ssh_host_ed25519_key" \
+        || die "Failed to decrypt host key"
+    chmod 600 "$ROOT_MOUNT/etc/ssh/ssh_host_ed25519_key"
+    chown root:root "$ROOT_MOUNT/etc/ssh/ssh_host_ed25519_key" 2>/dev/null || true
+    success "SSH host key placed at /etc/ssh/ssh_host_ed25519_key"
+
+    # Pre-seed age identity
+    info "Decrypting and placing age identity..."
+    mkdir -p "$ROOT_MOUNT/etc/age"
+    chmod 755 "$ROOT_MOUNT/etc/age"
+    age --decrypt -i "$AGE_IDENTITY" "$AGE_KEY_SECRET" \
+        | install -m 600 -o root /dev/stdin "$ROOT_MOUNT/etc/age/key.txt" \
+        || die "Failed to decrypt age identity"
+    success "Age identity placed at /etc/age/key.txt"
+
+else
+    warn "Skipping key pre-seeding (--age-identity and --secrets-dir not provided)"
+    warn "The Pi will not be able to decrypt agenix secrets on first boot."
+    warn "Re-run with --age-identity and --secrets-dir to enable this."
+fi
+
+# ─── Verify installation ──────────────────────────────────────────────────────
 
 section "Verifying installation..."
 info "Root partition contents:"
@@ -444,7 +498,7 @@ ls -la "$FIRMWARE_MOUNT/"
 
 # Verify the firmware partition has the bare minimum the Pi needs to boot
 MISSING=()
-[[ -f "$FIRMWARE_MOUNT/config.txt" ]]    || MISSING+=("config.txt")
+[[ -f "$FIRMWARE_MOUNT/config.txt" ]] || MISSING+=("config.txt")
 [[ -f "$FIRMWARE_MOUNT/bootcode.bin" ]] \
     || [[ -f "$FIRMWARE_MOUNT/start4.elf" ]] \
     || [[ -n "$(ls "$FIRMWARE_MOUNT"/*.dtb 2>/dev/null)" ]] \
