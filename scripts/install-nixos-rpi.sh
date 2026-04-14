@@ -172,7 +172,7 @@ confirm_destructive() {
 
     section "WARNING - DESTRUCTIVE OPERATION"
     printf "\n"
-    warn "ALL DATA on ${BOLD}${disk}${RESET}${YELLOW} will be permanently destroyed."
+    warn "ALL DATA on ${RED}${disk}${RESET}${YELLOW} will be permanently destroyed."
     warn "This cannot be undone."
     printf "\n"
 
@@ -469,6 +469,92 @@ chown root:root "$TIMESYNC_CLOCK" 2>/dev/null || true
 
 success "Clock seeded to $(date '+%Y-%m-%d %H:%M:%S %Z')"
 info "systemd-timesyncd will use this as a lower bound on first boot"
+
+
+# ─── Copy flake configuration to worker's home ───────────────────────────────
+# Copies the local flake directory to /home/users/worker/.nixos on the
+# installed system so the Pi can be rebuilt locally.
+#
+# The directory is created here because user home dirs may not exist yet
+# in the mounted root (they're created on first activation). NixOS will
+# leave existing files under /home alone during activation.
+
+section "Copying flake configuration to /home/users/worker/.nixos..."
+
+FLAKE_CONFIG_OWNER="worker"
+FLAKE_CONFIG_GROUP="users"
+FLAKE_CONFIG_HOME="$ROOT_MOUNT/home/users/worker"
+FLAKE_CONFIG_DST="$FLAKE_CONFIG_HOME/.nixos"
+
+# Extract the path component from the (already-normalised) FLAKE_REF.
+# After normalisation it is one of:
+#   path:/abs/dir#nixosConfigurations.host
+#   ./rel/dir#nixosConfigurations.host
+#   github:user/repo#nixosConfigurations.host   ← remote, skip
+FLAKE_PATH="${FLAKE_REF%%#*}" # everything before '#'
+
+copy_flake_to_target() {
+    local src=$1
+
+    # Absolute Path
+    src=$(realpath "$src") || die "Could not resolve flake path: $src"
+    [[ -d "$src" ]] || die "Flake source directory does not exist: $src"
+
+    # Create home dir skeleton if absent.
+    if [[ ! -d "$FLAKE_CONFIG_HOME" ]]; then
+        info "Creating home directory ${FLAKE_CONFIG_HOME}"
+        mkdir -p "$FLAKE_CONFIG_HOME"
+        chmod 700 "$FLAKE_CONFIG_HOME"
+    fi
+
+    info "Copying ${src} → ${FLAKE_CONFIG_DST}"
+    mkdir -p "$FLAKE_CONFIG_DST"
+    # -a preserves permissions/timestamps/symlinks; --delete ensures a clean copy
+    rsync -a --delete "$src/" "$FLAKE_CONFIG_DST/"
+
+    # Resolve worker's UID/GID from the *host* system as a best-effort.
+    # If the user doesn't exist on the host yet, fall back to root ownership and warn
+    local uid gid
+    if uid=$(id -u "$FLAKE_CONFIG_OWNER" 2>/dev/null) \
+        && gid=$(getent group "$FLAKE_CONFIG_GROUP" 2>/dev/null | cut -d: -f3); then
+        chown -R "${uid}:${gid}" "$FLAKE_CONFIG_HOME"
+        info "Ownership set to ${FLAKE_CONFIG_OWNER}:${FLAKE_CONFIG_GROUP} (${uid}:${gid})"
+    else
+        warn "User '${FLAKE_CONFIG_OWNER}' or group '${FLAKE_CONFIG_GROUP}' not found on host."
+        warn "Files will be owned by root. After first boot, run:"
+        warn "  sudo chown -R ${FLAKE_CONFIG_OWNER}:${FLAKE_CONFIG_GROUP} ~/.nixos"
+    fi
+
+    # Directories 755, regular files 644
+    find "$FLAKE_CONFIG_DST" -type d -exec chmod 755 {} +
+    find "$FLAKE_CONFIG_DST" -type f -exec chmod 644 {} +
+    # Re-lock keys or secrets
+    find "$FLAKE_CONFIG_DST" -type f \
+        \( -name "*.pem" -o -name "*.key" -o -name "id_*" -o -name "*.age" \) \
+        ! -name "*.pub" -exec chmod 600 {} +
+
+    success "Flake configuration copied to ~/.nixos"
+}
+
+case "$FLAKE_PATH" in
+    path:*)
+        copy_flake_to_target "${FLAKE_PATH#path:}"
+        ;;
+    /*|./*)
+        copy_flake_to_target "$FLAKE_PATH"
+        ;;
+    .)
+        copy_flake_to_target "."
+        ;;
+    github:*|git+*)
+        warn "Flake ref is remote (${FLAKE_PATH}); skipping config copy."
+        warn "Clone it manually on the Pi: git clone <url> ~/.nixos"
+        ;;
+    *)
+        warn "Unrecognised flake path format '${FLAKE_PATH}'; skipping config copy."
+        warn "Copy your flake directory to ~/.nixos on the Pi manually."
+        ;;
+esac
 
 # ─── Pre-seed age and host keys ───────────────────────────────────────────────
 # The SSH host key and the age identity are pre-seeded from the secrets directory
