@@ -446,6 +446,30 @@ bash -c "${INSTALL_CMD} $(printf '%q' "$TOPLEVEL")" \
 
 success "Firmware partition populated by installBootLoader"
 
+# ─── Seed system clock for first boot ────────────────────────────────────────
+# On hardware without a battery-backed RTC, the clock resets to epoch on power loss.
+# If the date is too far off, TLS certificate validation fails before NTP can correct
+# it - breaking the very DNS/NTP connections needed to fix the time.
+#
+# systemd-timesyncd reads /var/lib/systemd/timesync/clock on boot and uses it
+# as a lower bound for the system clock, ensuring time only moves forward.
+# Writing the installer host's current time here gives the Pi a sane starting
+# point so NTP can resync cleanly on first boot.
+
+section "Seeding system clock for first boot..."
+
+TIMESYNC_DIR="$ROOT_MOUNT/var/lib/systemd/timesync"
+TIMESYNC_CLOCK="$TIMESYNC_DIR/clock"
+
+mkdir -p "$TIMESYNC_DIR"
+touch "$TIMESYNC_CLOCK"
+touch -t "$(date '+%Y%m%d%H%M.%S')" "$TIMESYNC_CLOCK"
+chmod 644 "$TIMESYNC_CLOCK"
+chown root:root "$TIMESYNC_CLOCK" 2>/dev/null || true
+
+success "Clock seeded to $(date '+%Y-%m-%d %H:%M:%S %Z')"
+info "systemd-timesyncd will use this as a lower bound on first boot"
+
 # ─── Pre-seed age and host keys ───────────────────────────────────────────────
 # The SSH host key and the age identity are pre-seeded from the secrets directory
 # so the Pi can decrypt its own agenix secrets autonomously from the very first
