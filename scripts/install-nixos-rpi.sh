@@ -472,18 +472,18 @@ info "systemd-timesyncd will use this as a lower bound on first boot"
 
 
 # ─── Copy flake configuration to worker's home ───────────────────────────────
-# Copies the local flake directory to /home/users/worker/.nixos on the
+# Copies the local flake directory to /home/worker/.nixos on the
 # installed system so the Pi can be rebuilt locally.
 #
 # The directory is created here because user home dirs may not exist yet
 # in the mounted root (they're created on first activation). NixOS will
 # leave existing files under /home alone during activation.
 
-section "Copying flake configuration to /home/users/worker/.nixos..."
+section "Copying flake configuration to /home/worker/.nixos..."
 
 FLAKE_CONFIG_OWNER="worker"
 FLAKE_CONFIG_GROUP="users"
-FLAKE_CONFIG_HOME="$ROOT_MOUNT/home/users/worker"
+FLAKE_CONFIG_HOME="$ROOT_MOUNT/home/worker"
 FLAKE_CONFIG_DST="$FLAKE_CONFIG_HOME/.nixos"
 
 # Extract the path component from the (already-normalised) FLAKE_REF.
