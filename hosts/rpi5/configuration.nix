@@ -12,6 +12,8 @@
 
     (paths.modules + /locale.nix)
     (paths.modules + /networking.nix)
+
+    (paths.modules + /aliases.nix)
   ];
 
   boot.loader.raspberry-pi.firmwarePath = "/boot/firmware";
