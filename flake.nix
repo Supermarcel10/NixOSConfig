@@ -39,6 +39,7 @@
     }:
     let
       paths = {
+        hosts = ./hosts;
         modules = ./modules;
         hardware = paths.modules + /hardware;
         desktop_environments = paths.modules + /desktop_environments;
