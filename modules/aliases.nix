@@ -22,7 +22,8 @@
     # NixOS
     nfu = "nix flake update";
     nrs = "sudo nixos-rebuild switch --flake ~/.nixos#$(hostname)";
+    nrsu = "nfu && nrs";
     nrb = "sudo nixos-rebuild boot --flake ~/.nixos#$(hostname)";
-    nrbf = "nfu && nrb";
+    nrbu = "nfu && nrb";
   };
 }
