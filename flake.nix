@@ -50,6 +50,9 @@
         secrets = secrets;
       };
 
+      rpiNodes = import (paths.hosts + /rpi5/nodes.nix);
+      baseRpiIpOffset = 50;
+
       flameshotOverlay = final: prev: {
         flameshot = prev.flameshot.overrideAttrs (old: {
           src = final.fetchFromGitHub {
@@ -86,13 +89,38 @@
         flameshotOverlay
         legcordOverlay
       ];
+
+      rpiConfigurations = builtins.foldl' (acc: name: let
+        index = builtins.length acc;
+        ip4 = "192.168.1.${toString (baseRpiIpOffset + index)}";
+        ip6 = "fd00::1:0:0:${toString (baseRpiIpOffset + index)}";
+      in acc // {
+        ${name} = nixos-raspberrypi.lib.nixosSystem {
+          modules = [
+            ({ ... }: {
+              networking.hostName = name;
+
+              networking.interfaces.end0 = {
+                ipv4.addresses = [{ address = ip4; prefixLength = 24; }];
+                ipv6.addresses = [{ address = ip6; prefixLength = 64; }];
+              };
+              age.secrets.hostKey.file = paths.secrets + "/${name}-host-key.age";
+            })
+            (paths.hosts + /rpi5/configuration.nix)
+            agenix.nixosModules.default
+          ];
+          specialArgs = {
+            inherit nixos-raspberrypi paths agenix;
+          };
+        };
+      }) {} rpiNodes;
     in
     {
       nixosConfigurations = {
         marcel-pc = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            ./hosts/marcel-pc/configuration.nix
+            (paths.hosts + /marcel-pc/configuration.nix)
             agenix.nixosModules.default
             (
               { pkgs, ... }:
@@ -116,7 +144,7 @@
 
         marcel-laptop = nixpkgs.lib.nixosSystem {
           modules = [
-            ./hosts/marcel-laptop/configuration.nix
+            (paths.hosts + /marcel-laptop/configuration.nix)
             agenix.nixosModules.default
             { nixpkgs.overlays = overlays; }
           ];
@@ -125,43 +153,6 @@
             inherit agenix paths;
           };
         };
-
-        ## Raspberry Pi Cluster
-        calisto = nixos-raspberrypi.lib.nixosSystem {
-          modules = [
-            ./hosts/rpi5/nodes/calisto.nix
-            ./hosts/rpi5/configuration.nix
-            agenix.nixosModules.default
-          ];
-
-          specialArgs = {
-            inherit nixos-raspberrypi paths agenix;
-          };
-        };
-
-        europa = nixos-raspberrypi.lib.nixosSystem {
-          modules = [
-            ./hosts/rpi5/nodes/europa.nix
-            ./hosts/rpi5/configuration.nix
-            agenix.nixosModules.default
-          ];
-
-          specialArgs = {
-            inherit nixos-raspberrypi paths agenix;
-          };
-        };
-
-        ganymede = nixos-raspberrypi.lib.nixosSystem {
-          modules = [
-            ./hosts/rpi5/nodes/ganymede.nix
-            ./hosts/rpi5/configuration.nix
-            agenix.nixosModules.default
-          ];
-
-          specialArgs = {
-            inherit nixos-raspberrypi paths agenix;
-          };
-        };
-      };
+      } // rpiConfigurations;
     };
 }
