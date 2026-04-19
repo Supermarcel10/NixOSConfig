@@ -17,6 +17,7 @@
     openjdk21
     python311
     rustc
+    rust-analyzer
     cargo
     mold # Drop in replacement for LLVM lld linkers
     gcc
