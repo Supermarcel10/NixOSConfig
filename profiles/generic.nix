@@ -41,7 +41,7 @@
       cudaSupport = true;
       inherit (pkgs) cudaPackages;
     })
-    legcord # Discord replacement
+    unstable.legcord # Discord replacement
     teams-for-linux
     zoom-us
     unstable.tidal-hifi

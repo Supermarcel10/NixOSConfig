@@ -10,10 +10,6 @@
       flake = false;
     };
     agenix.url = "github:ryantm/agenix";
-    legcord = {
-      url = "github:Legcord/Legcord/dev";
-      flake = false;
-    };
     dzgui-flake.url = "github:jiriks74/dzgui.flake";
   };
 
@@ -33,7 +29,6 @@
       nixos-raspberrypi,
       secrets,
       agenix,
-      legcord,
       dzgui-flake,
       ...
     }:
@@ -71,23 +66,8 @@
         });
       };
 
-      legcordOverlay = final: prev: {
-        legcord = prev.legcord.overrideAttrs (old: {
-          src = legcord;
-          version = "dev";
-          pnpmDeps = final.fetchPnpmDeps {
-            pname = "legcord";
-            version = "dev";
-            src = legcord;
-            fetcherVersion = 1;
-            hash = "sha256-9sdN5tbCCe/euTo8zRkU0C3yQ8sAufPyN8a4GeJW/Us=";
-          };
-        });
-      };
-
       overlays = [
         flameshotOverlay
-        legcordOverlay
       ];
 
       rpiConfigurations = builtins.foldl' (acc: name: let
