@@ -1,6 +1,8 @@
 { ... }:
 
 {
+  # Gives the kernel a fast swap outlet so it can move cold pages out of
+  # physical RAM before reaching OOM, preventing hard freezes.
   zramSwap = {
     enable = true;
     algorithm = "zstd";
@@ -8,12 +10,10 @@
   };
 
   boot.kernel.sysctl = {
-    # High swappiness is counter-intuitive but correct for zram: since zram is
-    # fast (in-memory), eagerly moving cold pages there frees physical RAM
-    # early and prevents the kernel from stalling at the OOM boundary.
-    # Value of 180 is the upstream recommendation for zram systems (used by
-    # CachyOS, Fedora, Android, ChromeOS).
-    "vm.swappiness" = 180;
+    # 180 = aggressive zram swap (upstream default for CachyOS)
+    # 150 = gaming-optimized (move pages to swap early, keep RAM free)
+    # 160 = safe middle ground that works for both scenarios
+    "vm.swappiness" = 160;
 
     # Disable swap read-ahead for zram. Read-ahead makes sense for slow disk
     # swap (amortises seek cost) but wastes RAM on zram where random access is
@@ -30,6 +30,10 @@
     # during heavy write workloads.
     "vm.dirty_background_ratio" = 5;
     "vm.dirty_ratio" = 10;
+
+    # Increase max map count for wine/proton (needs more memory mappings).
+    # Default 65536 can be limiting for complex games; 262144 is safe.
+    "vm.max_map_count" = 262144;
   };
 
   # Nix build memory safety net.
