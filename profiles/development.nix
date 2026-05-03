@@ -9,6 +9,9 @@
     # Zed IDE
     unstable.zed-editor
 
+    # AI Tooling
+    unstable.opencode
+
     # Development Tools & Programming Languages
     git
     gh
