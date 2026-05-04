@@ -106,7 +106,7 @@
               { pkgs, ... }:
               {
                 environment.systemPackages = [
-                  dzgui-flake.packages.${pkgs.system}.dzgui
+                  dzgui-flake.packages.${pkgs.stdenv.hostPlatform.system}.dzgui
                 ];
               }
             )
