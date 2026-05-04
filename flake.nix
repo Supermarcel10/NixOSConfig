@@ -5,10 +5,6 @@
     nixos-raspberrypi = {
       url = "github:nvmd/nixos-raspberrypi/main";
     };
-    secrets = {
-      url = "git+file:./secrets";
-      flake = false;
-    };
     agenix.url = "github:ryantm/agenix";
     dzgui-flake.url = "github:jiriks74/dzgui.flake";
   };
@@ -27,7 +23,6 @@
       nixpkgs,
       nixpkgs-unstable,
       nixos-raspberrypi,
-      secrets,
       agenix,
       dzgui-flake,
       ...
@@ -42,7 +37,7 @@
         apps = ./apps;
         profiles = ./profiles;
 
-        secrets = secrets;
+        secrets = ./secrets;
       };
 
       rpiNodes = import (paths.hosts + /rpi5/nodes.nix);
