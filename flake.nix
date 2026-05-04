@@ -71,7 +71,7 @@
       ];
 
       rpiConfigurations = builtins.foldl' (acc: name: let
-        index = builtins.length acc;
+        index = builtins.length (builtins.attrNames acc);
         ip4 = "192.168.1.${toString (baseRpiIpOffset + index)}";
         ip6 = "fd00::1:0:0:${toString (baseRpiIpOffset + index)}";
       in acc // {
@@ -131,6 +131,10 @@
 
           specialArgs = {
             inherit agenix paths;
+            unstable = import nixpkgs-unstable {
+              system = "x86_64-linux";
+              config.allowUnfree = true;
+            };
           };
         };
       } // rpiConfigurations;
