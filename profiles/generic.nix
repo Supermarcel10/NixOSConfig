@@ -27,6 +27,7 @@
     wget
     btop-rocm
     tree
+    direnv
     lm_sensors
     fanctl
     ripgrep
