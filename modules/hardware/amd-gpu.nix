@@ -8,7 +8,9 @@
   ];
   services.xserver.videoDrivers = [ "amdgpu" ];
 
+  hardware.amdgpu.opencl.enable = true;
   hardware.amdgpu.overdrive.enable = true;
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
