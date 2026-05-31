@@ -13,9 +13,9 @@
   services.resolved = {
     enable = true;
     dnssec = "true";
-    extraConfig = ''
-      DNSOverTLS=yes
-    '';
+    settings = {
+      Resolve."DNSOverTLS" = "yes";
+    };
   };
 
   networking.nameservers = [
