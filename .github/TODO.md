@@ -15,3 +15,4 @@
 - [ ] Persistent DE setup
   - [ ] Potentially move to Hyprland
 - [ ] Fix KDE search lagging behind by .25s
+- [ ] Update RPi Cluster once upstream (https://github.com/nvmd/nixos-raspberrypi/releases) is updated to 26.05
