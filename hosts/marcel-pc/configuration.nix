@@ -18,6 +18,7 @@
     (paths.modules + /ssh-knownhosts.nix)
     (paths.modules + /printing.nix)
     (paths.modules + /cross-compilation.nix)
+    (paths.modules + /remote-builders.nix)
 
     (paths.profiles + /generic.nix)
     (paths.profiles + /development.nix)
