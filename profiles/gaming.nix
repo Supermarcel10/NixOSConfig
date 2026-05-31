@@ -16,7 +16,7 @@
         gamescope
         gamemode
         mangohud
-        wineWowPackages.waylandFull
+        wineWow64Packages.waylandFull
       ];
     })
 

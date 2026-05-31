@@ -12,9 +12,11 @@
 
   services.resolved = {
     enable = true;
-    dnssec = "true";
     settings = {
-      Resolve."DNSOverTLS" = "yes";
+      Resolve = {
+        DNSSEC = "true";
+        DNSOverTLS = "yes";
+      };
     };
   };
 
