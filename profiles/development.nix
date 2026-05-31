@@ -18,7 +18,7 @@
     docker
     docker-client
     openjdk21
-    python311
+    python315
     rustc
     rust-analyzer
     cargo
@@ -36,7 +36,7 @@
   ];
 
   environment.variables = {
-    PYTHON = "${pkgs.python311}/bin/python";
+    PYTHON = "${pkgs.python315}/bin/python";
     RUSTFLAGS = "-C link-arg=-fuse-ld=mold";
     CARGO_BUILD_TARGET = "x86_64-unknown-linux-gnu";
   };
