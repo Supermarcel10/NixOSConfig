@@ -1,4 +1,5 @@
-{ pkgs, agenix, unstable, paths, ... }:
+{ pkgs, agenix, paths, ... }:
+
 {
   imports = [
     (paths.apps + /kitty.nix)
@@ -34,20 +35,20 @@
     fanctl
     ripgrep
     imagemagick
-    unstable.lact
+    lact
 
     # GENERAL APPS
     obsidian
-    unstable.grayjay
+    grayjay
     obs-studio
     (pkgs.blender.override {
       cudaSupport = true;
       inherit (pkgs) cudaPackages;
     })
-    unstable.legcord # Discord replacement
+    legcord # Discord replacement
     teams-for-linux
     zoom-us
-    unstable.tidal-hifi
+    tidal-hifi
     filezilla
     mpv
     texlab
@@ -60,7 +61,7 @@
     after = [ "multi-user.target" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "${unstable.lact}/bin/lact daemon";
+      ExecStart = "${pkgs.lact}/bin/lact daemon";
     };
     enable = true;
   };
