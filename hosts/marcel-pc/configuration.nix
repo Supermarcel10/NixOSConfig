@@ -23,6 +23,7 @@
     (paths.profiles + /generic.nix)
     (paths.profiles + /development.nix)
     (paths.profiles + /gaming.nix)
+    (paths.profiles + /photography.nix)
   ];
 
   boot.loader.systemd-boot.enable = true;
