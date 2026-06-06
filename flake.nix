@@ -88,6 +88,10 @@
                 ipv4.addresses = [{ address = ip4; prefixLength = 24; }];
                 ipv6.addresses = [{ address = ip6; prefixLength = 64; }];
               };
+              networking.defaultGateway = {
+                address = "192.168.1.1";
+                interface = "end0";
+              };
               age.secrets.hostKey.file = paths.secrets + "/${name}-host-key.age";
             })
             (paths.hosts + /rpi5/configuration.nix)
