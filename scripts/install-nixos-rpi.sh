@@ -534,6 +534,23 @@ copy_flake_to_target() {
         ! -name "*.pub" -exec chmod 600 {} +
 
     success "Flake configuration copied to ~/.nixos"
+
+    # ── Configure git remote ──────────────────────────────────────────────
+    section "Configuring git remote..."
+    cd "${FLAKE_CONFIG_DST}"
+    SRC_REMOTE=$(git -C "${src}" config --get remote.origin.url 2>/dev/null || true)
+    if [[ -n "$SRC_REMOTE" ]]; then
+        if git remote get-url origin &>/dev/null; then
+            info "Remote 'origin' already configured: $(git remote get-url origin)"
+        else
+            git remote add origin "$SRC_REMOTE"
+            success "Added git remote origin: ${SRC_REMOTE}"
+        fi
+    else
+        warn "No git remote detected in source repo."
+        warn "Add one manually after first boot:"
+        warn "  cd ~/.nixos && git remote add origin <url>"
+    fi
 }
 
 case "$FLAKE_PATH" in
