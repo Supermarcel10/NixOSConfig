@@ -13,7 +13,7 @@
     (paths.modules + /raspberry-pi-5/power-efficiency.nix)
 
     (paths.modules + /locale.nix)
-    (paths.modules + /networking.nix)
+    (paths.modules + /raspberry-pi-5/networking.nix)
 
     (paths.modules + /aliases.nix)
   ];
