@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ options, lib, pkgs, ... }:
 
 {
   networking.networkmanager = {
@@ -12,6 +12,11 @@
 
   services.resolved = {
     enable = true;
+  }
+  # TODO: Remove this conditional once nixos-raspberrypi updates to a NixOS
+  # version where services.resolved.settings exists (26.05+). At that point,
+  # the RPi nodes will also have this option and we can set it unconditionally.
+  // lib.optionalAttrs (options.services.resolved ? settings) {
     settings = {
       Resolve = {
         DNSSEC = "true";
