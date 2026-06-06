@@ -10,6 +10,8 @@
     raspberry-pi-5.base
     raspberry-pi-5.page-size-16k  # 16K page-size optimisations
 
+    (paths.modules + /raspberry-pi-5/power-efficiency.nix)
+
     (paths.modules + /locale.nix)
     (paths.modules + /networking.nix)
 
