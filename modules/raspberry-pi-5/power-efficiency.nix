@@ -12,6 +12,34 @@
         enable = lib.mkDefault true;
         value = lib.mkDefault 16; # Minimum GPU memory (headless)
       };
+
+      # Disable auto-detection of cameras/DSI displays
+      camera_auto_detect = {
+        enable = lib.mkDefault true;
+        value = lib.mkForce 0;
+      };
+      display_auto_detect = {
+        enable = lib.mkDefault true;
+        value = lib.mkForce 0;
+      };
+
+      # Disable HDMI (headless)
+      "hdmi_ignore_hotplug:0" = {
+        enable = lib.mkDefault true;
+        value = lib.mkForce 1;
+      };
+      "hdmi_ignore_hotplug:1" = {
+        enable = lib.mkDefault true;
+        value = lib.mkForce 1;
+      };
+      "hdmi_ignore_cec:0" = {
+        enable = lib.mkDefault true;
+        value = lib.mkForce 1;
+      };
+      "hdmi_ignore_cec:1" = {
+        enable = lib.mkDefault true;
+        value = lib.mkForce 1;
+      };
     };
 
     base-dt-params = {
@@ -76,5 +104,27 @@
 
   boot.kernelParams = [
     "usbcore.autosuspend=20"
+    "nvme_core.default_ps_max_latency_us=200"
+    "pcie_aspm.policy=powersave"
   ];
+
+  boot.blacklistedKernelModules = [
+    "snd_bcm2835"
+    "brcmfmac"
+    "brcmutil"
+    "bluetooth"
+    "btbcm"
+    "btintel"
+    "btrtl"
+    "btusb"
+  ];
+
+  services.journald.extraConfig = ''
+    Storage=volatile
+    RuntimeMaxUse=64M
+    MaxRetentionSec=1day
+    Compress=yes
+    RateLimitIntervalSec=30s
+    RateLimitBurst=1000
+  '';
 }
