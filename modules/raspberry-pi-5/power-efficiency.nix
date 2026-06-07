@@ -62,11 +62,11 @@
       # Disable PWR LEDs
       pwr_led_trigger = {
         enable = lib.mkDefault true;
-        value = lib.mkDefault "default-on";
+        value = lib.mkDefault "none";
       };
       pwr_led_activelow = {
         enable = lib.mkDefault true;
-        value = lib.mkDefault "off";
+        value = lib.mkDefault "on";
       };
 
       # Disable Ethernet PHY LEDs
