@@ -25,6 +25,7 @@
     device = "/dev/disk/by-label/FIRMWARE";
     fsType = "vfat";
     options = [
+      "noatime"
       "fmask=0022"
       "dmask=0022"
     ];
@@ -33,6 +34,7 @@
   fileSystems."/" = {
     device = "/dev/disk/by-label/NIXOS_SD";
     fsType = "ext4";
+    options = [ "noatime" ];
   };
 
   # agenix secrets

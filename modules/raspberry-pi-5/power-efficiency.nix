@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 
 {
   # FIRMWARE (config.txt)
@@ -11,6 +11,12 @@
       gpu_mem = {
         enable = lib.mkDefault true;
         value = lib.mkDefault 16; # Minimum GPU memory (headless)
+      };
+
+      # Disable UART/Serial Console
+      enable_uart = {
+        enable = lib.mkDefault true;
+        value = lib.mkForce 0;
       };
 
       # Disable auto-detection of cameras/DSI displays
@@ -102,6 +108,9 @@
   powerManagement.cpuFreqGovernor = lib.mkDefault "schedutil";
   powerManagement.powertop.enable = true;
 
+  # Error log level only
+  boot.consoleLogLevel = lib.mkForce 3;
+
   boot.kernelParams = [
     "usbcore.autosuspend=20"
     "nvme_core.default_ps_max_latency_us=200"
@@ -127,4 +136,18 @@
     RateLimitIntervalSec=30s
     RateLimitBurst=1000
   '';
+
+  systemd.services.ethtool-end0-power = {
+    description = "Apply end0 power-saving ethtool settings";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "systemd-networkd.service" ];
+    bindsTo = [ "sys-subsystem-net-devices-end0.device" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+    script = ''
+      ${pkgs.ethtool}/bin/ethtool -s end0 wol d
+    '';
+  };
 }
