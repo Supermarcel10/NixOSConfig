@@ -34,7 +34,7 @@
       # Disable PWR LEDs
       pwr_led_trigger = {
         enable = lib.mkDefault true;
-        value = lib.mkDefault "none";
+        value = lib.mkDefault "default-on";
       };
       pwr_led_activelow = {
         enable = lib.mkDefault true;
