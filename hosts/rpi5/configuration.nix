@@ -16,6 +16,7 @@
     (paths.modules + /raspberry-pi-5/networking.nix)
 
     (paths.modules + /aliases.nix)
+    (paths.modules + /raspberry-pi-5/k3s.nix)
   ];
 
   boot.loader.raspberry-pi.firmwarePath = "/boot/firmware";

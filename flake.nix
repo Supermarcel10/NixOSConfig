@@ -78,10 +78,11 @@
         index = builtins.length (builtins.attrNames acc);
         ip4 = "192.168.1.${toString (baseRpiIpOffset + index)}";
         ip6 = "fd00::1:0:0:${toString (baseRpiIpOffset + index)}";
+        isBootstrap = name == "calisto";
       in acc // {
         ${name} = nixos-raspberrypi.lib.nixosSystem {
           modules = [
-            ({ ... }: {
+            ({ config, ... }: {
               networking.hostName = name;
 
               networking.interfaces.end0 = {
@@ -93,6 +94,13 @@
                 interface = "end0";
               };
               age.secrets.hostKey.file = paths.secrets + "/${name}-host-key.age";
+              age.secrets.k3sToken.file = paths.secrets + "/k3s-token.age";
+
+              cluster.k3s = {
+                enable = isBootstrap;
+                role = if isBootstrap then "bootstrap" else "server";
+                tokenFile = config.age.secrets.k3sToken.path;
+              };
             })
             (paths.hosts + /rpi5/configuration.nix)
             agenix.nixosModules.default
