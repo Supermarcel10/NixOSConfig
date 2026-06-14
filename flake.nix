@@ -11,6 +11,7 @@
     };
     agenix.url = "github:ryantm/agenix";
     dzgui-flake.url = "github:jiriks74/dzgui.flake";
+    nix-gaming.url = "github:fufexan/nix-gaming";
   };
 
   nixConfig = {
@@ -28,14 +29,16 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       nixpkgs-unstable,
       nixos-raspberrypi,
       secrets,
       agenix,
       dzgui-flake,
+      nix-gaming,
       ...
-    }:
+    }@inputs:
     let
       paths = {
         hosts = ./hosts;
@@ -130,7 +133,7 @@
           ];
 
           specialArgs = {
-            inherit agenix paths;
+            inherit agenix paths inputs;
             unstable = import nixpkgs-unstable {
               system = "x86_64-linux";
               config.allowUnfree = true;
@@ -146,7 +149,7 @@
           ];
 
           specialArgs = {
-            inherit agenix paths;
+            inherit agenix paths inputs;
             unstable = import nixpkgs-unstable {
               system = "x86_64-linux";
               config.allowUnfree = true;

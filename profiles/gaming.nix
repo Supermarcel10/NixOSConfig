@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ./windows-compat.nix
+  ];
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
@@ -16,7 +20,6 @@
         gamescope
         gamemode
         mangohud
-        wineWow64Packages.waylandFull
       ];
     })
 

@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ./windows-compat.nix
+  ];
+
   environment.systemPackages = with pkgs; [
     # Core raw processing
     darktable
