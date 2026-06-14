@@ -109,7 +109,7 @@
             agenix.nixosModules.default
           ];
           specialArgs = {
-            inherit nixos-raspberrypi paths agenix;
+            inherit nixos-raspberrypi paths inputs;
           };
         };
       }) {} rpiNodes;
@@ -133,7 +133,7 @@
           ];
 
           specialArgs = {
-            inherit agenix paths inputs;
+            inherit paths inputs;
             unstable = import nixpkgs-unstable {
               system = "x86_64-linux";
               config.allowUnfree = true;
@@ -149,7 +149,7 @@
           ];
 
           specialArgs = {
-            inherit agenix paths inputs;
+            inherit paths inputs;
             unstable = import nixpkgs-unstable {
               system = "x86_64-linux";
               config.allowUnfree = true;

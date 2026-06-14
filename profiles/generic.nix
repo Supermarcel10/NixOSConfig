@@ -1,4 +1,4 @@
-{ pkgs, agenix, paths, ... }:
+{ pkgs, inputs, paths, ... }:
 
 {
   imports = [
@@ -23,7 +23,7 @@
     killall
     niv
     age
-    agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
     qrencode
     flameshot
     onlyoffice-desktopeditors
