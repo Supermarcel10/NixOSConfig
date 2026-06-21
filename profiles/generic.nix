@@ -46,6 +46,9 @@
       inherit (pkgs) cudaPackages;
     })
     legcord # Discord replacement
+    (pkgs.stoat-desktop.override {
+      electron_38 = pkgs.electron;
+    })
     teams-for-linux
     zoom-us
     tidal-hifi
