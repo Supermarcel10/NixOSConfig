@@ -3,7 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     bottles
-    winetricks
-    inputs.nix-gaming.packages.${pkgs.system}.wine-ge
+    inputs.nix-gaming.packages.${pkgs.system}.winetricks-git
+    inputs.nix-gaming.packages.${pkgs.system}.wine-tkg
   ];
 }
