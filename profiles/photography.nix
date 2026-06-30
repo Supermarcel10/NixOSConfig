@@ -3,7 +3,10 @@
 {
   imports = [
     ./windows-compat.nix
+    ../apps/on1-photo-raw/default.nix
   ];
+
+  on1-photo-raw.enable = true;
 
   environment.systemPackages = with pkgs; [
     # Core raw processing
