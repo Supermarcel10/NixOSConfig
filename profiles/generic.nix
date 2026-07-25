@@ -31,6 +31,7 @@
     killall
     niv
     age
+    parted
     inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
     qrencode
     flameshot
