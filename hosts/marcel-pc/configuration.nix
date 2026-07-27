@@ -14,6 +14,7 @@
     (paths.desktop_environments + /kde_plasma/environment.nix)
 
     (paths.modules + /configuration.nix)
+    (paths.modules + /garbage-collection.nix)
     (paths.modules + /aliases.nix)
     (paths.modules + /ssh-knownhosts.nix)
     (paths.modules + /printing.nix)
