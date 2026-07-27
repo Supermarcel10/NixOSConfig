@@ -400,7 +400,6 @@ success "System toplevel: ${TOPLEVEL}"
 
 section "Running nixos-install..."
 nixos-install \
-    --flake "$NIXOS_INSTALL_FLAKE" \
     --root  "$ROOT_MOUNT" \
     --no-bootloader \
     --no-root-password \
