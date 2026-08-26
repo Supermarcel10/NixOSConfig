@@ -55,6 +55,7 @@
       inherit (pkgs) cudaPackages;
     })
     legcord # Discord replacement
+    whatsapp-electron
     (pkgs.stoat-desktop.override {
       electron_38 = pkgs.electron;
     })
