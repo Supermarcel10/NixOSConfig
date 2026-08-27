@@ -54,12 +54,12 @@
       cudaSupport = true;
       inherit (pkgs) cudaPackages;
     })
-    legcord # Discord replacement
+    unstable.legcord # Discord replacement
     whatsapp-electron
     stoat-desktop
     teams-for-linux
     zoom-us
-    tidal-hifi
+    unstable.tidal-hifi
     filezilla
     mpv
     texlab
