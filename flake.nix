@@ -55,27 +55,7 @@
       rpiNodes = import (paths.hosts + /rpi5/nodes.nix);
       baseRpiIpOffset = 50;
 
-      flameshotOverlay = final: prev: {
-        flameshot = prev.flameshot.overrideAttrs (old: {
-          src = final.fetchFromGitHub {
-            owner = "flameshot-org";
-            repo = "flameshot";
-            rev = "76d883362fa1872f3e0aa31c179c98ebbd0effff";
-            sha256 = "068pp62rn1hig1xzss779rpzlrsx8ic7wk6168z2vpw8h9ma1xyx";
-          };
-          patches = [ ];
-          nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ final.git ];
-          postPatch = ''
-            mkdir -p external/Qt-Color-Widgets external/KDSingleApplication
-            echo 'add_library(qtcolorwidgets INTERFACE)' > external/Qt-Color-Widgets/CMakeLists.txt
-            echo 'add_library(kdsingleapplication INTERFACE)' > external/KDSingleApplication/CMakeLists.txt
-          '';
-        });
-      };
-
-      overlays = [
-        flameshotOverlay
-      ];
+      overlays = [];
 
       rpiConfigurations = builtins.foldl' (acc: name: let
         index = builtins.length (builtins.attrNames acc);

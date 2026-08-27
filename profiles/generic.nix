@@ -1,4 +1,4 @@
-{ pkgs, inputs, paths, ... }:
+{ pkgs, inputs, paths, unstable, ... }:
 
 {
   imports = [
@@ -34,7 +34,7 @@
     parted
     inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
     qrencode
-    flameshot
+    unstable.flameshot
     onlyoffice-desktopeditors
     wget
     btop-rocm
