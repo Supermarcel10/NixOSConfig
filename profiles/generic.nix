@@ -56,9 +56,7 @@
     })
     legcord # Discord replacement
     whatsapp-electron
-    (pkgs.stoat-desktop.override {
-      electron_38 = pkgs.electron;
-    })
+    stoat-desktop
     teams-for-linux
     zoom-us
     tidal-hifi
