@@ -50,10 +50,6 @@
     obsidian
     grayjay
     obs-studio
-    (pkgs.blender.override {
-      cudaSupport = true;
-      inherit (pkgs) cudaPackages;
-    })
     unstable.legcord # Discord replacement
     whatsapp-electron
     stoat-desktop
