@@ -11,7 +11,9 @@
     };
     agenix.url = "github:ryantm/agenix";
     dzgui-flake.url = "github:jiriks74/dzgui.flake";
-    nix-gaming.url = "github:fufexan/nix-gaming";
+    # Pinned to revision before DXVK 3.0 / Wine-TKG 11.16 which breaks
+    # ON1 Photo RAW on RDNA4 (RX 9070 XT) with Mesa 26.1.x.
+    nix-gaming.url = "github:fufexan/nix-gaming/0c680d0426cf04641f718d083bd352e20bc3e0dc";
   };
 
   nixConfig = {

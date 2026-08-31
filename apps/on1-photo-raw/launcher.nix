@@ -1,7 +1,7 @@
 { pkgs, wine }:
 
 let
-  on1Exe = "$HOME/.local/share/on1-photo-raw/wine-prefix/drive_c/Program Files/ON1/ON1 Photo RAW 2026.4/ON1 Photo RAW 2026.4.exe";
+  on1Exe = "$HOME/.local/share/on1-photo-raw/wine-prefix/drive_c/Program Files/ON1/ON1 Photo RAW 2026.4/ON1 Photo RAW 2026.exe";
 
   on1-launcher = pkgs.writeShellApplication {
     name = "on1-photo-raw";
@@ -17,6 +17,9 @@ let
         echo "  setup-on1-photo-raw <path-to-on1-installer.exe>"
         exit 1
       fi
+
+      unset WAYLAND_DISPLAY
+      export DISPLAY=:0
 
       export WINEPREFIX
       export WINE
