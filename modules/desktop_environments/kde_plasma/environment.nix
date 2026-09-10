@@ -1,6 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, paths, ... }:
 
 {
+  imports = [
+    (paths.apps + /flameshot.nix)
+  ];
+
   # X11 Windowing System
   services.xserver.enable = true;
 

@@ -34,7 +34,6 @@
     parted
     inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
     qrencode
-    unstable.flameshot
     onlyoffice-desktopeditors
     wget
     btop-rocm
