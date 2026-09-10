@@ -55,7 +55,7 @@
     stoat-desktop
     teams-for-linux
     zoom-us
-    unstable.tidal-hifi
+    unstable.sone
     filezilla
     mpv
     texlab
