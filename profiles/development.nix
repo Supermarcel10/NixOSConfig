@@ -10,7 +10,7 @@
     unstable.zed-editor
 
     # AI Tooling
-    opencode
+    unstable.opencode
 
     # Development Tools & Programming Languages
     git
