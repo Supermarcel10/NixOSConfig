@@ -47,7 +47,7 @@
 
     # GENERAL APPS
     obsidian
-    grayjay
+    unstable.grayjay
     obs-studio
     unstable.legcord # Discord replacement
     whatsapp-electron
