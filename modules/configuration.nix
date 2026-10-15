@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./ai-skills.nix
     ./locale.nix
     ./networking.nix
     ./sound.nix

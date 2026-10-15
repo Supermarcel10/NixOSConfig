@@ -9,6 +9,10 @@
       url = "git+file:./secrets";
       flake = false;
     };
+    skills = {
+      url = "git+file:./skills";
+      flake = false;
+    };
     agenix.url = "github:ryantm/agenix";
     dzgui-flake.url = "github:jiriks74/dzgui.flake";
     lightcraft.url = "github:storytold/lightcraft/v0.8.0";
@@ -36,6 +40,7 @@
       nixpkgs-unstable,
       nixos-raspberrypi,
       secrets,
+      skills,
       agenix,
       dzgui-flake,
       nix-gaming,
@@ -52,6 +57,7 @@
         profiles = ./profiles;
 
         secrets = secrets;
+        skills = skills;
       };
 
       rpiNodes = import (paths.hosts + /rpi5/nodes.nix);

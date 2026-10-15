@@ -445,7 +445,8 @@
         "nixos-raspberrypi": "nixos-raspberrypi",
         "nixpkgs": "nixpkgs_5",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "secrets": "secrets"
+        "secrets": "secrets",
+        "skills": "skills"
       }
     },
     "secrets": {
@@ -461,6 +462,22 @@
       "original": {
         "type": "git",
         "url": "file:./secrets"
+      }
+    },
+    "skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792022187,
+        "narHash": "sha256-4mVO5SCtEamIlv6AxBNRsqOIQ105DGLUCHtXrgAjifI=",
+        "ref": "refs/heads/main",
+        "rev": "144f75ca7997a62057476246c1b830f1b7bb6819",
+        "revCount": 2,
+        "type": "git",
+        "url": "file:./skills"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:./skills"
       }
     }
   },

@@ -2,5 +2,9 @@
 	path = secrets
 	url = https://github.com/Supermarcel10/NixOSConfig-Secrets
 	active = main
+[submodule "skills"]
+	path = skills
+	url = https://github.com/Supermarcel10/AI-skills
+	branch = main
 [submodule]
 	recurse = true
