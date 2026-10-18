@@ -135,6 +135,8 @@
           modules = [
             (paths.hosts + /marcel-laptop/configuration.nix)
             agenix.nixosModules.default
+            (paths.apps + /lightcraft.nix)
+            { lightcraft.enable = true; }
             { nixpkgs.overlays = overlays; }
           ];
 
