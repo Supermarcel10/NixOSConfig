@@ -19,6 +19,12 @@
     "/dev/disk/by-uuid/5479720c-0790-4899-8b02-f34d9828a312";
   networking.hostName = "marcel-laptop";
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings.General.Experimental = true;
+  };
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "pl";
@@ -40,6 +46,10 @@
       kdePackages.kate
     ];
   };
+
+  environment.systemPackages = with pkgs; [
+    bluez
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
