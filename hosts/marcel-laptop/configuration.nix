@@ -3,6 +3,8 @@
   imports = [
     ./hardware-configuration.nix
 
+    (paths.hardware + /intel-gpu.nix)
+
     (paths.modules + /configuration.nix)
     (paths.desktop_environments + /kde_plasma/environment.nix)
     (paths.modules + /aliases.nix)
