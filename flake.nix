@@ -15,7 +15,7 @@
     };
     agenix.url = "github:ryantm/agenix";
     dzgui-flake.url = "github:jiriks74/dzgui.flake";
-    lightcraft.url = "github:storytold/lightcraft/v0.13.0";
+    lightcraft.url = "github:storytold/lightcraft/v0.14.0";
     lightcraft.inputs.nixpkgs.follows = "nixpkgs-unstable";
     # Pinned to revision before DXVK 3.0 / Wine-TKG 11.16 which breaks
     # ON1 Photo RAW on RDNA4 (RX 9070 XT) with Mesa 26.1.x.
