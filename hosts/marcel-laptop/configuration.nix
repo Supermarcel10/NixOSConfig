@@ -27,6 +27,8 @@
     settings.General.Experimental = true;
   };
 
+  virtualisation.docker.enable = true;
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "pl";
@@ -43,6 +45,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "docker"
     ];
     packages = with pkgs; [
       kdePackages.kate
