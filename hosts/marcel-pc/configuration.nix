@@ -16,6 +16,7 @@
     (paths.modules + /configuration.nix)
     (paths.modules + /garbage-collection.nix)
     (paths.modules + /aliases.nix)
+    (paths.modules + /bash.nix)
     (paths.modules + /ssh-knownhosts.nix)
     (paths.modules + /printing.nix)
     (paths.modules + /cross-compilation.nix)
