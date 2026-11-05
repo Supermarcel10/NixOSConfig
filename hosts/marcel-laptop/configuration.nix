@@ -6,6 +6,7 @@
     (paths.hardware + /intel-gpu.nix)
 
     (paths.modules + /configuration.nix)
+    (paths.modules + /security.nix)
     (paths.desktop_environments + /kde_plasma/environment.nix)
     (paths.modules + /aliases.nix)
     (paths.modules + /bash.nix)
