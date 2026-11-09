@@ -7,6 +7,7 @@
     ./networking.nix
     ./sound.nix
     ./mouse.nix
+    ./garbage-collection.nix
   ];
 
   # Sudo Setup
