@@ -17,6 +17,8 @@ This section is used to jump between submodules of this repository, for easier m
 
 🔐 [SECRETS](https://github.com/Supermarcel10/NixOSConfig-Secrets) (PRIVATE & ENCRYPTED)
 
+🧠 [AI-SKILLS](https://github.com/Supermarcel10/AI-skills)
+
 ## 🔧 What is Nix / NixOS?
 
 [NixOS](https://nixos.org/) is a Linux distribution that uses the Nix package manager.<br/>
@@ -42,6 +44,7 @@ Nix uses a functional approach to package management and system configuration:
 
 - `configuration.nix`: Main NixOS configuration file
 - `secrets/`: Directory containing encrypted files used for storing secrets. [(private repo)](https://github.com/Supermarcel10/NixOSConfig-Secrets)
+- `skills/`: Directory containing personal AI agent skills used by opencode. [(repo)](https://github.com/Supermarcel10/AI-skills)
 - TBD...
 
 ## 🚀 Usage
