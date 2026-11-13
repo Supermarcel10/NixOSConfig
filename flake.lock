@@ -54,17 +54,17 @@
     "craft-fonts": {
       "flake": false,
       "locked": {
-        "lastModified": 1791722036,
-        "narHash": "sha256-mNnDzBcOp1X10dzmiW0iBAkb74QjuzMO4slWudxXCTE=",
+        "lastModified": 1792808533,
+        "narHash": "sha256-jZ3VBAJDofB6RvsS7GGV5lLT4xiShIjpz5XHBCD2oUc=",
         "owner": "storytold",
         "repo": "craft-fonts",
-        "rev": "3d9ab3a132ed0eff457e424226a435a901da30d3",
+        "rev": "b076417b5880bd4154bd22f00695b1d28c6bea83",
         "type": "github"
       },
       "original": {
         "owner": "storytold",
         "repo": "craft-fonts",
-        "rev": "3d9ab3a132ed0eff457e424226a435a901da30d3",
+        "rev": "b076417b5880bd4154bd22f00695b1d28c6bea83",
         "type": "github"
       }
     },
@@ -242,16 +242,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1792934792,
-        "narHash": "sha256-v6UZTeyxzDZ1bFoYGwvwv6tF11qQNXf4ib8siGjpcHU=",
+        "lastModified": 1794223939,
+        "narHash": "sha256-3Yi52TE4/XyoBDmDI5SoHtwnSsG7g7nTj+bkgq2eoZY=",
         "owner": "storytold",
         "repo": "lightcraft",
-        "rev": "03c88c166c054c009db2a47187d59991f6232b85",
+        "rev": "192ff72923c39e6623f2c7ff67ab3a119deb8071",
         "type": "github"
       },
       "original": {
         "owner": "storytold",
-        "ref": "v0.14.0",
+        "ref": "v0.20.0",
         "repo": "lightcraft",
         "type": "github"
       }
