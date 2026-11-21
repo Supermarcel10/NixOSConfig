@@ -13,6 +13,10 @@
       url = "git+file:./skills";
       flake = false;
     };
+    hyprland-configs = {
+      url = "git+file:./modules/desktop_environments/hyprland/configs";
+      flake = false;
+    };
     agenix.url = "github:ryantm/agenix";
     dzgui-flake.url = "github:jiriks74/dzgui.flake";
     lightcraft.url = "github:storytold/lightcraft/v0.20.0";
@@ -41,6 +45,7 @@
       nixos-raspberrypi,
       secrets,
       skills,
+      hyprland-configs,
       agenix,
       dzgui-flake,
       nix-gaming,
@@ -58,6 +63,7 @@
 
         secrets = secrets;
         skills = skills;
+        hyprland_configs = hyprland-configs;
       };
 
       rpiNodes = import (paths.hosts + /rpi5/nodes.nix);

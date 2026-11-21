@@ -8,3 +8,7 @@
 	branch = main
 [submodule]
 	recurse = true
+[submodule "modules/desktop_environments/hyprland/configs"]
+	path = modules/desktop_environments/hyprland/configs
+	url = https://github.com/Supermarcel10/HyprlandConfig.git
+	branch = main

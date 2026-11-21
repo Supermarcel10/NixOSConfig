@@ -234,6 +234,22 @@
         "type": "github"
       }
     },
+    "hyprland-configs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1795264400,
+        "narHash": "sha256-bROdJFzcZ4HyeJz39skDaROKahFEwoy2IORLiMThHEE=",
+        "ref": "refs/heads/main",
+        "rev": "1de39cd0fbc5d2d96f1da06855d68fe4f7fb61b0",
+        "revCount": 2,
+        "type": "git",
+        "url": "file:./modules/desktop_environments/hyprland/configs"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:./modules/desktop_environments/hyprland/configs"
+      }
+    },
     "lightcraft": {
       "inputs": {
         "craft-fonts": "craft-fonts",
@@ -440,6 +456,7 @@
       "inputs": {
         "agenix": "agenix",
         "dzgui-flake": "dzgui-flake",
+        "hyprland-configs": "hyprland-configs",
         "lightcraft": "lightcraft",
         "nix-gaming": "nix-gaming",
         "nixos-raspberrypi": "nixos-raspberrypi",
