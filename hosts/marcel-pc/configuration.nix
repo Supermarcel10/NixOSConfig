@@ -13,6 +13,8 @@
     (paths.hardware + /audio.nix)      # Audio latency optimization
 
     (paths.desktop_environments + /kde_plasma/environment.nix)
+    (paths.desktop_environments + /hyprland/environment.nix)
+    (paths.desktop_environments + /hyprland/quickshell.nix)
 
     (paths.modules + /configuration.nix)
     (paths.modules + /aliases.nix)
