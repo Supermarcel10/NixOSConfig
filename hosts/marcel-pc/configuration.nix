@@ -1,8 +1,9 @@
-{ pkgs, lib, paths, ... }:
+{ pkgs, paths, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
+    ./boot-improvements.nix
 
     # Hardware Configs
     (paths.hardware + /zen4-cpu.nix)   # AMD P-State, Ryzen scheduling tuning
@@ -31,14 +32,7 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelParams = [ "quiet" ];
-  boot.consoleLogLevel = 3;
-  boot.initrd.systemd.enable = true;
-  boot.loader.timeout = 1;
   boot.supportedFilesystems = [ "ntfs" ];
-
-  # Disable NetworkManager-wait-online blocks on boot
-  systemd.services.NetworkManager-wait-online.wantedBy = lib.mkForce [ ];
 
   networking.hostName = "marcel-pc";
 
