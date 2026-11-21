@@ -1,11 +1,9 @@
-{ ... }:
+{ lib, ... }:
 
 {
-  boot = {
-    # Enable AMD P-State driver with guided mode for native frequency scaling
-    # and preferred core selection (uses SMT-disabled cores first for lower latency).
-    kernelParams = [ "amd_pstate=guided" ];
+  powerManagement.cpuFreqGovernor = lib.mkForce "powersave";
 
+  boot = {
     kernel.sysctl = {
       # Higher value keeps tasks on same core/socket, reducing cache misses.
       # 5ms is safe for Zen3/Zen4 (default ~500µs can cause migration thrashing).

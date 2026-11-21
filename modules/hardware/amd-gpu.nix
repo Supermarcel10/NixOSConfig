@@ -1,9 +1,8 @@
 { pkgs, ... }:
 
 {
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  hardware.amdgpu.initrd.enable = true;
   boot.kernelParams = [
-    "amdgpu.ppfeaturemask=0xfffd3fff"
     "amdgpu.gpu_recovery=1"
   ];
   services.xserver.videoDrivers = [ "amdgpu" ];
