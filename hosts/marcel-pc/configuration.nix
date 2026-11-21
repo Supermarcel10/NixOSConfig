@@ -21,6 +21,8 @@
     (paths.modules + /cross-compilation.nix)
     (paths.modules + /remote-builders.nix)
 
+    (paths.apps + /ollama.nix)
+
     (paths.profiles + /generic.nix)
     (paths.profiles + /development.nix)
     (paths.profiles + /gaming.nix)
