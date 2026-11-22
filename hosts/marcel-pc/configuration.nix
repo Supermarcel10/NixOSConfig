@@ -12,7 +12,6 @@
     (paths.hardware + /storage.nix)    # I/O scheduler, dirty page tuning
     (paths.hardware + /audio.nix)      # Audio latency optimization
 
-    (paths.desktop_environments + /kde_plasma/environment.nix)
     (paths.desktop_environments + /hyprland/environment.nix)
     (paths.desktop_environments + /hyprland/quickshell.nix)
 
@@ -49,6 +48,27 @@
     layout = "pl";
     variant = "";
   };
+
+  # =========
+  # TEMPORARY TO BE REMOVED
+  # =========
+
+  # Keep SDDM greeter
+  services.xserver.enable = true;
+  services.displayManager.sddm.enable = true;
+  programs.ssh.askPassword = "";
+
+  # KDE apps kept until Hyprland-native replacements
+  environment.systemPackages = with pkgs; [
+    kdePackages.ark # Archives/Extraction
+    kdePackages.gwenview # Images
+    kdePackages.okular # PDFs
+    kdePackages.ktexteditor # KATE text editor
+  ];
+
+  # =========
+  # END REMOVAL
+  # =========
 
   # Configure console keymap
   console.keyMap = "pl2";
