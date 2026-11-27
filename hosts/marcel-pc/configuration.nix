@@ -14,6 +14,7 @@
 
     (paths.desktop_environments + /hyprland/environment.nix)
     (paths.desktop_environments + /hyprland/quickshell.nix)
+    (paths.greeters + /regreet.nix)
 
     (paths.modules + /configuration.nix)
     (paths.modules + /aliases.nix)
@@ -52,10 +53,6 @@
   # =========
   # TEMPORARY TO BE REMOVED
   # =========
-
-  # Keep SDDM greeter
-  services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
   programs.ssh.askPassword = "";
 
   # KDE apps kept until Hyprland-native replacements

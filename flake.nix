@@ -57,6 +57,7 @@
         modules = ./modules;
         hardware = paths.modules + /hardware;
         desktop_environments = paths.modules + /desktop_environments;
+        greeters = paths.modules + /greeters;
 
         apps = ./apps;
         profiles = ./profiles;
