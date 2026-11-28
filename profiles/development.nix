@@ -22,6 +22,7 @@
     rustc
     rust-analyzer
     cargo
+    sccache # shared rustc cache
     mold # Drop in replacement for LLVM lld linkers
     gcc
     nil # LSP for Nix
@@ -39,6 +40,11 @@
     PYTHON = "${pkgs.python315}/bin/python";
     RUSTFLAGS = "-C link-arg=-fuse-ld=mold";
     CARGO_BUILD_TARGET = "x86_64-unknown-linux-gnu";
+
+    # Rust shared compilation cache
+    RUSTC_WRAPPER = "sccache";
+    SCCACHE_DIR = "$HOME/.cache/sccache";
+    SCCACHE_CACHE_SIZE = "50G";
   };
 
   programs.java = {
